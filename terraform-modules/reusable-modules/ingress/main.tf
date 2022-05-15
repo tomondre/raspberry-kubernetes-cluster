@@ -3,20 +3,20 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
     apiVersion = "traefik.containo.us/v1alpha1"
     kind       = "IngressRoute"
     metadata   = {
-      name      = local.service_name
-      namespace = var.namespace
+      name      = var.service_name
+      namespace = var.service_namespace
     }
     spec = {
-      entryPoints = ["web"]
+      entryPoints = [var.entrypoint]
       routes      = [
         {
           kind     = "Rule"
-          match    = "Host(`${module.dns_record.fqdn}`)"
+          match    = "Host(`${var.ingress_host_fqdn}`)"
           services = [
             {
-              name      = local.service_name
-              namespace = var.namespace
-              port      = local.service_port
+              name      = var.service_name
+              namespace = var.service_namespace
+              port      = var.service_port
             }
           ]
         }

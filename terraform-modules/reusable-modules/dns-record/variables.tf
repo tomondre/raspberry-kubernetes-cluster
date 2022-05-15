@@ -1,4 +1,4 @@
-variable "service_name" {
+variable "record_host" {
   type = string
 }
 

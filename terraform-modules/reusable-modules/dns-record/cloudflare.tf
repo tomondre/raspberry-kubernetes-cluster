@@ -7,7 +7,7 @@ terraform {
 }
 
 resource "cloudflare_record" "domain_record" {
-  name    = var.service_name
+  name    = var.record_host
   type    = "A"
   zone_id = data.cloudflare_zone.zone.id
   value   = var.router_ip

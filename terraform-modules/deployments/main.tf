@@ -8,7 +8,6 @@ terraform {
   }
 }
 
-
 module "api_cv_deployment" {
   source            = "../reusable-modules/deployment"
   name              = "api-cv"

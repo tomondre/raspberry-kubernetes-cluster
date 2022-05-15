@@ -1,3 +1,3 @@
 output "fqdn" {
-  value = "${var.service_name}.${local.zone_name}"
+  value = "${var.record_host}.${local.zone_name}"
 }
