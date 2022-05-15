@@ -36,7 +36,7 @@ module "portfolio_deployment" {
   source            = "../reusable-modules/deployment"
   name              = "portfolio"
   health_check_path = "/Healthcheck.html"
-  image_tag         = "2"
+  image_tag         = "4"
   image_url         = "docker.io/tomondre/portfolio"
   port              = 80
   server_ip         = var.server_ip
