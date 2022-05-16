@@ -10,9 +10,9 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
       entryPoints = var.entrypoint
       routes      = [
         {
-          kind     = "Rule"
-          match    = "Host(`${var.ingress_host_fqdn}`)"
-          services = [
+          kind        = "Rule"
+          match       = "Host(`${var.host_name}.tomondre.com`)"
+          services    = [
             {
               name      = var.service_name
               namespace = var.service_namespace
@@ -20,7 +20,10 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
             }
           ]
         }
-      ]
+      ],
+      tls = {
+        secretName = "${var.host_name}-secret"
+      }
     }
   }
 }

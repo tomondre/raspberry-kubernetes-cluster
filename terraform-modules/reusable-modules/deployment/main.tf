@@ -5,8 +5,9 @@ locals {
 
 module "dns_record" {
   source = "../dns-record"
-  record_host = var.name
+  host_name = var.name
   router_ip = var.server_ip
+  namespace = var.namespace
 }
 
 module "service" {
@@ -19,8 +20,10 @@ module "service" {
 
 module "ingress" {
   source = "../ingress"
-  ingress_host_fqdn = module.dns_record.fqdn
+  host_name = var.name
   service_name = local.service_name
   service_namespace = var.namespace
   service_port = local.service_port
+  entrypoint = var.entrypoint
+  depends_on = [module.dns_record]
 }

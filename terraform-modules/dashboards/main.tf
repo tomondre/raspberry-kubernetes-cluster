@@ -9,15 +9,20 @@ terraform {
 }
 
 #KUBERNETES DASHBOARD
+locals {
+  dashboard_host = "dashboard"
+}
+
 module "kubernetes_dashboard_dns" {
-  source      = "../reusable-modules/dns-record"
-  router_ip   = var.server_ip
-  record_host = "dashboard"
+  source    = "../reusable-modules/dns-record"
+  router_ip = var.server_ip
+  host_name = local.dashboard_host
+  namespace = "kubernetes-dashboard"
 }
 
 module "kubernetes_dashboard_ingress" {
   source            = "../reusable-modules/ingress"
-  ingress_host_fqdn = module.kubernetes_dashboard_dns.fqdn
+  host_name         = local.dashboard_host
   service_name      = "kubernetes-dashboard"
   service_namespace = "kubernetes-dashboard"
   service_port      = 443
@@ -30,9 +35,10 @@ locals {
 }
 
 module "traefik_dashboard_dns" {
-  source      = "../reusable-modules/dns-record"
-  router_ip   = var.server_ip
-  record_host = local.traefik_service_name
+  source    = "../reusable-modules/dns-record"
+  router_ip = var.server_ip
+  host_name = local.traefik_service_name
+  namespace = "kube-system"
 }
 
 resource "kubernetes_manifest" "traefik_ingress_route" {
@@ -62,7 +68,10 @@ resource "kubernetes_manifest" "traefik_ingress_route" {
             }
           ]
         }
-      ]
+      ],
+      tls = {
+        secretName = "${local.traefik_service_name}-secret"
+      }
     }
   }
 }

@@ -16,6 +16,7 @@ module "api_cv_deployment" {
   image_url         = "docker.io/tomondre/api-cv"
   port              = 9000
   server_ip         = var.server_ip
+  entrypoint = ["web", "websecure"]
   env               = {
     HOST = "api-cv.tomondre.com"
   }

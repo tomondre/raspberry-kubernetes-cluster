@@ -57,3 +57,8 @@ variable "env" {
 variable "server_ip" {
   type = string
 }
+
+variable "entrypoint" {
+  type = list(string)
+  default = ["websecure"]
+}

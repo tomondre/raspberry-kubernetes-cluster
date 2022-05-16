@@ -10,7 +10,7 @@ variable "service_namespace" {
   type = string
 }
 
-variable "ingress_host_fqdn" {
+variable "host_name" {
   type = string
 }
 
