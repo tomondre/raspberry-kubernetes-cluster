@@ -15,6 +15,6 @@ variable "ingress_host_fqdn" {
 }
 
 variable "entrypoint" {
-  type = string
-  default = "web"
+  type = list(string)
+  default = ["websecure"]
 }

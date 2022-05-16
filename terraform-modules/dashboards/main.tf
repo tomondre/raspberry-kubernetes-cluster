@@ -35,7 +35,7 @@ module "traefik_dashboard_dns" {
   record_host = local.traefik_service_name
 }
 
-resource "kubernetes_manifest" "traefik-ingress-route" {
+resource "kubernetes_manifest" "traefik_ingress_route" {
   manifest = {
     apiVersion = "traefik.containo.us/v1alpha1"
     kind       = "IngressRoute"
@@ -44,7 +44,7 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
       namespace = local.namespace
     }
     spec = {
-      entryPoints = ["web"]
+      entryPoints = ["websecure"]
       routes      = [
         {
           kind        = "Rule"

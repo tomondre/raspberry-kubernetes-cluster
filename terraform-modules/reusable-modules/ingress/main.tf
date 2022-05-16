@@ -7,7 +7,7 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
       namespace = var.service_namespace
     }
     spec = {
-      entryPoints = [var.entrypoint]
+      entryPoints = var.entrypoint
       routes      = [
         {
           kind     = "Rule"
