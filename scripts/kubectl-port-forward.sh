@@ -1,0 +1,1 @@
+ssh -f ${VAR_USER_NAME}@${VAR_MASTER_NODE_IP} -L 6443:localhost:6443 -N

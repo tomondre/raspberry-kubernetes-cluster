@@ -1,8 +1,3 @@
-#TODO Fillout
-VAR_MASTER_NODE_IP=""
-VAR_USER_NAME=""
-
-
 ssh-keygen -R $VAR_MASTER_NODE_IP
 
 ssh -o "StrictHostKeyChecking no" "${VAR_USER_NAME}@${VAR_MASTER_NODE_IP}" "
