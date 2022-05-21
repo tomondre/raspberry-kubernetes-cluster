@@ -1,5 +1,15 @@
 terraform {
+  cloud {
+    organization = "raspberry-kubernetes-cluster"
+
+    workspaces {
+      tags = ["dashboards"]
+    }
+  }
   required_providers {
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
     cloudflare = {
       source = "cloudflare/cloudflare"
     }
