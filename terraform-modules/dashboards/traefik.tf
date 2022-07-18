@@ -6,7 +6,6 @@ locals {
 
 module "traefik_dashboard_dns" {
   source    = "../reusable-modules/dns-record"
-  router_ip = var.server_ip
   host_name = local.traefik_service_name
   namespace = "kube-system"
 }
@@ -20,7 +19,7 @@ resource "kubernetes_manifest" "traefik_ingress_route" {
       namespace = local.traefik_namespace
     }
     spec = {
-      entryPoints = ["websecure"]
+      entryPoints = ["websecure", "web"]
       routes      = [
         {
           kind        = "Rule"
@@ -30,10 +29,10 @@ resource "kubernetes_manifest" "traefik_ingress_route" {
               name      = "auth-middleware"
               namespace = local.traefik_namespace
             },
-            {
-              name      = local.traefik_whitelist_name
-              namespace = local.traefik_namespace
-            }
+#            {
+#              name      = local.traefik_whitelist_name
+#              namespace = local.traefik_namespace
+#            }
           ]
           services = [
             {
@@ -42,10 +41,10 @@ resource "kubernetes_manifest" "traefik_ingress_route" {
             }
           ]
         }
-      ],
-      tls = {
-        secretName = "${local.traefik_service_name}-secret"
-      }
+      ]
+#    , tls = {
+#        secretName = "${local.traefik_service_name}-secret"
+#      }
     }
   }
 }
@@ -65,12 +64,12 @@ resource "kubernetes_manifest" "traefik-auth-middleware" {
       }
     }
   }
-  depends_on = [module.traefik_whitelist_middleware]
+#  depends_on = [module.traefik_whitelist_middleware]
 }
 
-module "traefik_whitelist_middleware" {
-  source        = "../reusable-modules/whitelist-middleware"
-  name          = local.traefik_whitelist_name
-  whitelist_ips = var.whitelist_ips
-  namespace     = local.traefik_namespace
-}
+#module "traefik_whitelist_middleware" {
+#  source        = "../reusable-modules/whitelist-middleware"
+#  name          = local.traefik_whitelist_name
+#  whitelist_ips = var.whitelist_ips
+#  namespace     = local.traefik_namespace
+#}

@@ -7,7 +7,6 @@ locals {
 
 module "kubernetes_dashboard_dns" {
   source    = "../reusable-modules/dns-record"
-  router_ip = var.server_ip
   host_name = local.dashboard_host
   namespace = "kubernetes-dashboard"
 }
@@ -35,21 +34,22 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  - web
   routes:
   - kind: Rule
     match: Host(`dashboard.tomondre.com`)
-    middlewares:
-    - name: ${local.kubernetes_whitelist_name}
-      namespace: ${local.kubernetes_namespace}
+#    middlewares:
+#    - name: ${local.kubernetes_whitelist_name}
+#      namespace: ${local.kubernetes_namespace}
     services:
     - name: kubernetes-dashboard
       namespace: ${local.kubernetes_namespace}
       port: 443
       serversTransport: ${local.transport_name}
-  tls:
-    secretName: dashboard-secret
+#  tls:
+#    secretName: dashboard-secret
 EOF
-  depends_on = [kubectl_manifest.kubernetes_transport]
+#  depends_on = [kubectl_manifest.kubernetes_transport]
 }
 
 module "whitelist_middleware" {
