@@ -4,6 +4,13 @@ terraform {
       source = "cloudflare/cloudflare"
     }
   }
+  cloud {
+    organization = "raspberry-kubernetes-cluster"
+
+    workspaces {
+      tags = ["deployments"]
+    }
+  }
 }
 
 provider "kubernetes" {
