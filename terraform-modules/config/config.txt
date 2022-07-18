@@ -1,0 +1,82 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+data:
+  config.json: |-
+    {
+      "nodePathMap":[
+      {
+        "node":"DEFAULT_PATH_FOR_NON_LISTED_NODES",
+        "paths":["/var/lib/rancher/k3s/storage"]
+      },
+      {
+      "node":"masterpi",
+      "paths":["/mnt/disk/storage"]
+      },
+      {
+      "node":"workeronerpi",
+      "paths":[]
+      }
+      ]
+    }
+  helperPod.yaml: |-
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: helper-pod
+    spec:
+      containers:
+      - name: helper-pod
+        image: rancher/mirrored-library-busybox:1.34.1
+  setup: |-
+    #!/bin/sh
+    while getopts "m:s:p:" opt
+    do
+        case $opt in
+            p)
+            absolutePath=$OPTARG
+            ;;
+            s)
+            sizeInBytes=$OPTARG
+            ;;
+            m)
+            volMode=$OPTARG
+            ;;
+        esac
+    done
+    mkdir -m 0777 -p ${absolutePath}
+    chmod 701 ${absolutePath}/..
+  teardown: |-
+    #!/bin/sh
+    while getopts "m:s:p:" opt
+    do
+        case $opt in
+            p)
+            absolutePath=$OPTARG
+            ;;
+            s)
+            sizeInBytes=$OPTARG
+            ;;
+            m)
+            volMode=$OPTARG
+            ;;
+        esac
+    done
+    rm -rf ${absolutePath}
+kind: ConfigMap
+metadata:
+  annotations:
+    objectset.rio.cattle.io/applied: H4sIAAAAAAAA/6ySX2vbMBTFv4p2t0fHieckBMEewtqysf4JW7aXCcy1dB2rsXWFpSaU0O8+FFPoYP8e9uj74xyfc9AJ0NtvNATLDiQcCsjAYESQJ9DsGrvL78MZnZQTQoFjQxuM7Q16BfJ7Op7JM1MgFVxcXq2/Xm+rzXr7obq6+1zd3t1W1x+/bC8vKsigpc7TsGGTP2LfgXyRQYpDodzeOiPFho1yPUVMgWT6icOepBjlE59w8KTPSDNkECg+eJDw+tW0tm4aWuWOre1I7Ciyj0Eo6GWQXioQ7KNyhsfsGgOJN+yjsG68CCEgg0g4GD66/+f5lEFqBxLen+e9QQ8ZPLdMs6NzHDFadiF9cn1POgaK+WA51xhjR7nlqU0ekP2W89HRMNkd9iBhX4YX5FBk4pN15t3aGHZ/tUijg4SONXaTEHnAHf2TKHjUSbl/qGkSHkOkPtXvsKbuj9VaDC1IKFZlUy70ctE0tS5ny/lyVjbzsikWq5lZ6eUK3xqszTyZ/hTSY2wn4+uFEf0yytOPAAAA//88hrMO/QIAAA
+    objectset.rio.cattle.io/id: ""
+    objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+    objectset.rio.cattle.io/owner-name: local-storage
+    objectset.rio.cattle.io/owner-namespace: kube-system
+  creationTimestamp: "2022-05-14T11:14:19Z"
+  labels:
+    objectset.rio.cattle.io/hash: 183f35c65ffbc3064603f43f1580d8c68a2dabd4
+  name: local-path-config
+  namespace: kube-system
+  resourceVersion: "407777"
+  uid: bfd4888a-5b10-4c5a-9838-a56938e45b48

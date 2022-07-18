@@ -24,8 +24,47 @@ metadata:
 spec:
   valuesContent: |-
     api:
-      dashboard: true
+      dashboard: false
     pilot:
-      token: "${var.pilot_traefik_token}"
+      token: ${var.pilot_traefik_token}
+    logs:
+      access:
+        enabled: true
+    experimental:
+      plugins:
+        traefik-real-ip:
+          moduleName: github.com/soulbalz/traefik-real-ip
+          version: v1.0.3
+    accessLog:
+      filePath: /var/log/traefik.log
+      format: json
+      fields:
+        headers:
+          defaultMode: keep
 EOF
 }
+
+resource "kubectl_manifest" "traefik-real-ip-middleware" {
+  yaml_body = <<-EOF
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-real-ip
+  namespace: default
+spec:
+  plugin:
+    traefik-real-ip:
+      excludenets:
+        - "127.0.0.1"
+EOF
+}
+
+#<<-EOF
+#accessLog:
+#      filePath: "/var/log/traefik.log"
+#      format: json
+#      fields:
+#        headers:
+#          defaultMode: keep
+#
+#EOF
