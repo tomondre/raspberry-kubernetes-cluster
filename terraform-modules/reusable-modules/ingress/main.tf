@@ -17,13 +17,11 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
               name      = var.service_name
               namespace = var.service_namespace
               port      = var.service_port
+              serversTransport = var.server_transport
             }
           ]
         }
-      ],
-      tls = {
-        secretName = "${var.host_name}-secret"
-      }
+      ]
     }
   }
 }

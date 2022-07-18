@@ -2,8 +2,9 @@ variable "host_name" {
   type = string
 }
 
-variable "router_ip" {
+variable "tunnel_dns" {
   type = string
+  default = "tunnel.tomondre.com"
 }
 
 variable "namespace" {
