@@ -4,6 +4,7 @@ variable "service_name" {
 
 variable "service_port" {
   type = number
+  default = 8080
 }
 
 variable "container_port" {

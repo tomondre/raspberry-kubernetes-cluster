@@ -49,7 +49,7 @@ metadata:
   namespace: cert-manager
 type: Opaque
 stringData:
-  api-token:
+  api-token: ${var.cloudflare_api_token}
 EOF
 
   depends_on = [kubectl_manifest.issuer]
@@ -59,26 +59,27 @@ EOF
 #https://stackoverflow.com/questions/63346728/issuing-certificate-as-secret-does-not-exist
 #https://cert-manager.io/docs/configuration/acme/dns01/cloudflare/
 
-#--------------------JUNK--------------------
-
 //Certificate example
 #resource "kubectl_manifest" "cert" {
 #  yaml_body = <<-EOF
 #apiVersion: cert-manager.io/v1
 #kind: Certificate
 #metadata:
-#  name: cert-${var.host_name}
-#  namespace: cert-manager
+#  name: wildcard-cert
+#  namespace: default
 #spec:
 #  secretName: cloudflare-api-token-secret
 #  issuerRef:
 #    name: letsencrypt
 #    kind: ClusterIssuer
-#  commonName: '${var.host_name}.tomondre.com'
+#  commonName: '*.tomondre.com'
 #  dnsNames:
-#  - "${var.host_name}.tomondre.com"
+#  - "tomondre.com"
+#  - "*.tomondre.com"
 #EOF
 #}
+
+#--------------------JUNK--------------------
 
 #STAGING SERVER
 #resource "kubectl_manifest" "dns" {
