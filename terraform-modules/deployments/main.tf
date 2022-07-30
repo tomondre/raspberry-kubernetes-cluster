@@ -32,7 +32,6 @@ module "portfolio_deployment" {
   port              = 80
 }
 
-//TODO Fix the health check and set it here
 module "lil_linko_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/healthcheck"
@@ -50,16 +49,17 @@ module "lil_linko_deployment" {
 module "deployments_overview_page" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/"
-  image_tag         = "6"
+  image_tag         = "7"
   image_url         = "docker.io/tomondre/deployments-page"
   name              = "deployments"
   port              = 80
 }
 
+#Change the internal dns call that ends with .tomondre.com to be routed to the load balancer of the kubernetes cluster
 module "is_ok_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/health"
-  image_tag         = "2"
+  image_tag         = "4"
   image_url         = "docker.io/tomondre/is-ok"
   name              = "is-ok"
   port              = 8080

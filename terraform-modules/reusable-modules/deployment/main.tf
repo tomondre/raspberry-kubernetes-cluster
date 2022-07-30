@@ -1,5 +1,5 @@
 locals {
-  service_name = "tomondre-${var.name}-service"
+  service_name = var.name
   service_port = 8080
 }
 
