@@ -3,8 +3,13 @@ variable "namespace" {
   default = "default"
 }
 
-variable "name" {
+variable "service_name" {
+  type    = string
+}
+
+variable "host_name" {
   type = string
+  default = ""
 }
 
 variable "replicas" {
