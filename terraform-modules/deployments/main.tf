@@ -6,11 +6,14 @@ module "api_cv_deployment" {
   source            = "../reusable-modules/deployment"
   service_name      = "api-cv"
   health_check_path = "/"
-  image_tag         = "5"
+  image_tag         = "7"
   image_url         = "docker.io/tomondre/api-cv"
   port              = 9000
   env               = {
-    HOST = "api-cv.tomondre.com"
+    PORT = 9000
+    HOST = "https://api-cv.tomondre.com/"
+    API_URL = "https://api.tomondre.com/"
+    NODE_TLS_REJECT_UNAUTHORIZED = "0"
   }
 }
 
@@ -68,7 +71,7 @@ module "is_ok_deployment" {
 module "api_tomondre_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/healthCheck"
-  image_tag         = "3"
+  image_tag         = "6"
   image_url         = "docker.io/tomondre/api-tomondre"
   service_name      = "api-tomondre"
   host_name         = "api"
