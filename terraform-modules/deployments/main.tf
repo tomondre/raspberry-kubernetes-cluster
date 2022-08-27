@@ -10,9 +10,9 @@ module "api_cv_deployment" {
   image_url         = "docker.io/tomondre/api-cv"
   port              = 9000
   env               = {
-    PORT = 9000
-    HOST = "https://api-cv.tomondre.com/"
-    API_URL = "https://api.tomondre.com/"
+    PORT                         = 9000
+    HOST                         = "https://api-cv.tomondre.com/"
+    API_URL                      = "https://api.tomondre.com/"
     NODE_TLS_REJECT_UNAUTHORIZED = "0"
   }
 }
@@ -24,15 +24,6 @@ module "lego_scraper_deployment" {
   image_tag         = "1"
   image_url         = "docker.io/tomondre/lego-scraper"
   port              = 9000
-}
-
-module "portfolio_deployment" {
-  source            = "../reusable-modules/deployment"
-  service_name      = "portfolio"
-  health_check_path = "/Healthcheck.html"
-  image_tag         = "4"
-  image_url         = "docker.io/tomondre/portfolio"
-  port              = 80
 }
 
 module "lil_linko_deployment" {
@@ -55,7 +46,7 @@ module "deployments_overview_page" {
   image_tag         = "9"
   image_url         = "docker.io/tomondre/deployments-page"
   service_name      = "deployments"
-  port = 80
+  port              = 80
 }
 
 #Change the internal dns call that ends with .tomondre.com to be routed to the load balancer of the kubernetes cluster
@@ -71,7 +62,7 @@ module "is_ok_deployment" {
 module "api_tomondre_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/healthCheck"
-  image_tag         = "6"
+  image_tag         = "7"
   image_url         = "docker.io/tomondre/api-tomondre"
   service_name      = "api-tomondre"
   host_name         = "api"
@@ -80,6 +71,47 @@ module "api_tomondre_deployment" {
     DATABASE_URL = var.api_tomondre_db_url
   }
 }
+
+#module "portfolio_deployment" {
+#  source            = "../reusable-modules/deployment"
+#  service_name      = "portfolio"
+#  health_check_path = "/Healthcheck.html"
+#  image_tag         = "4"
+#  image_url         = "docker.io/tomondre/portfolio"
+#  port              = 80
+#}
+
+module "portfolio_angular_deployment" {
+  source            = "../reusable-modules/deployment"
+  health_check_path = "/"
+  image_tag         = "11"
+  image_url         = "tomondre/portfolio-angular"
+  service_name      = "portfolio"
+  port              = 80
+}
+
+module "my_ip_api" {
+  source            = "../reusable-modules/deployment"
+  health_check_path = "/health"
+  image_tag         = "4"
+  image_url         = "tomondre/my-ip-api"
+  service_name      = "my-ip-api"
+  port              = 8080
+  env               = {
+    ABSTRACT_API_KEY = var.lil_linko_abstract_api_key
+    PORT             = 8080
+  }
+}
+
+module "my_ip" {
+  source            = "../reusable-modules/deployment"
+  health_check_path = "/Health.html"
+  image_tag         = "5"
+  image_url         = "tomondre/my-ip"
+  service_name      = "my-ip"
+  port              = 80
+}
+
 
 #For DEBUG purposes
 #For some weird reason, the deployment is clashing with other services using the same port - 80. I have to investigate a bit more what is this problem
