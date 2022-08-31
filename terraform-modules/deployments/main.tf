@@ -43,7 +43,7 @@ module "lil_linko_deployment" {
 module "deployments_overview_page" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/"
-  image_tag         = "9"
+  image_tag         = "12"
   image_url         = "docker.io/tomondre/deployments-page"
   service_name      = "deployments"
   port              = 80
@@ -53,7 +53,7 @@ module "deployments_overview_page" {
 module "is_ok_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/health"
-  image_tag         = "4"
+  image_tag         = "6"
   image_url         = "docker.io/tomondre/is-ok"
   service_name      = "is-ok"
   port              = 8080
@@ -62,7 +62,7 @@ module "is_ok_deployment" {
 module "api_tomondre_deployment" {
   source            = "../reusable-modules/deployment"
   health_check_path = "/healthCheck"
-  image_tag         = "7"
+  image_tag         = "8"
   image_url         = "docker.io/tomondre/api-tomondre"
   service_name      = "api-tomondre"
   host_name         = "api"
