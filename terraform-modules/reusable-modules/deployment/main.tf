@@ -1,27 +1,70 @@
-locals {
-  service_port = 8080
-  host_name    = var.host_name == "" ? var.service_name : var.host_name
-}
+resource "kubernetes_deployment" "deployment" {
+  metadata {
+    name      = var.service_name
+    namespace = var.namespace
+    labels    = {
+      app = var.service_name
+    }
+  }
 
-module "dns_record" {
-  source    = "../dns-record"
-  host_name = local.host_name
-  namespace = var.namespace
-}
+  spec {
+    replicas = var.replicas
 
-module "service" {
-  source         = "../service"
-  container_port = var.port
-  service_name   = var.service_name
-  service_port   = local.service_port
-  namespace      = var.namespace
-}
+    selector {
+      match_labels = {
+        app = var.service_name
+      }
+    }
 
-module "ingress" {
-  source            = "../ingress"
-  host_name         = local.host_name
-  service_name      = var.service_name
-  service_namespace = var.namespace
-  service_port      = local.service_port
-  depends_on        = [module.dns_record]
+    template {
+      metadata {
+        labels = {
+          app = var.service_name
+        }
+      }
+
+      spec {
+        container {
+          image = "${var.image_url}:${var.image_tag}"
+          name  = var.service_name
+
+          port {
+            container_port = var.port
+          }
+
+          dynamic "env" {
+            for_each = var.env
+            content {
+              name  = env.key
+              value = env.value
+            }
+          }
+
+          resources {
+            limits = {
+              cpu    = var.cpu_limit
+              memory = var.memory_limit
+            }
+            requests = {
+              cpu    = var.cpu_request
+              memory = var.memory_request
+            }
+          }
+
+          dynamic liveness_probe {
+            for_each = var.health_check_path != ""? [1] : []
+            content {
+              http_get {
+                path = var.health_check_path
+                port = var.port
+              }
+
+              initial_delay_seconds = 5
+              period_seconds        = 30
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -3,7 +3,7 @@ locals {
 }
 
 module "api_cv_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   service_name      = "api-cv"
   health_check_path = "/"
   image_tag         = "7"
@@ -18,7 +18,7 @@ module "api_cv_deployment" {
 }
 
 module "lego_scraper_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   service_name      = "lego-scraper"
   health_check_path = "/"
   image_tag         = "1"
@@ -27,7 +27,7 @@ module "lego_scraper_deployment" {
 }
 
 module "lil_linko_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/healthcheck"
   image_tag         = "17"
   image_url         = "docker.io/tomondre/lil-linko"
@@ -41,7 +41,7 @@ module "lil_linko_deployment" {
 }
 
 module "deployments_overview_page" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/"
   image_tag         = "13"
   image_url         = "docker.io/tomondre/deployments-page"
@@ -51,7 +51,7 @@ module "deployments_overview_page" {
 
 #Change the internal dns call that ends with .tomondre.com to be routed to the load balancer of the kubernetes cluster
 module "is_ok_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/health"
   image_tag         = "6"
   image_url         = "docker.io/tomondre/is-ok"
@@ -60,9 +60,9 @@ module "is_ok_deployment" {
 }
 
 module "api_tomondre_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/healthCheck"
-  image_tag         = "9"
+  image_tag         = "10"
   image_url         = "docker.io/tomondre/api-tomondre"
   service_name      = "api-tomondre"
   host_name         = "api"
@@ -73,7 +73,7 @@ module "api_tomondre_deployment" {
 }
 
 #module "portfolio_deployment" {
-#  source            = "../reusable-modules/deployment"
+#  source            = "../reusable-modules/full-deployment"
 #  service_name      = "portfolio"
 #  health_check_path = "/Healthcheck.html"
 #  image_tag         = "4"
@@ -82,16 +82,16 @@ module "api_tomondre_deployment" {
 #}
 
 module "portfolio_angular_deployment" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/"
-  image_tag         = "11"
+  image_tag         = "12"
   image_url         = "tomondre/portfolio-angular"
   service_name      = "portfolio"
   port              = 80
 }
 
 module "my_ip_api" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/health"
   image_tag         = "4"
   image_url         = "tomondre/my-ip-api"
@@ -104,7 +104,7 @@ module "my_ip_api" {
 }
 
 module "my_ip" {
-  source            = "../reusable-modules/deployment"
+  source            = "../reusable-modules/full-deployment"
   health_check_path = "/Health.html"
   image_tag         = "5"
   image_url         = "tomondre/my-ip"
@@ -112,11 +112,10 @@ module "my_ip" {
   port              = 80
 }
 
-
 #For DEBUG purposes
-#For some weird reason, the deployment is clashing with other services using the same port - 80. I have to investigate a bit more what is this problem
+#For some weird reason, the full-deployment is clashing with other services using the same port - 80. I have to investigate a bit more what is this problem
 #module "request_echo_deployment" {
-#  source            = "../reusable-modules/deployment"
+#  source            = "../reusable-modules/full-deployment"
 #  health_check_path = "/"
 #  image_tag         = "23"
 #  image_url         = "docker.io/mendhak/http-https-echo"

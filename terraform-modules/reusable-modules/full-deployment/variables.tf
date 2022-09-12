@@ -7,6 +7,11 @@ variable "service_name" {
   type    = string
 }
 
+variable "host_name" {
+  type = string
+  default = ""
+}
+
 variable "replicas" {
   type    = number
   default = 1
@@ -42,7 +47,6 @@ variable "memory_request" {
 
 variable "health_check_path" {
   type = string
-  default = ""
 }
 
 variable "port" {
@@ -53,4 +57,9 @@ variable "port" {
 variable "env" {
   type = map(string)
   default = {}
+}
+
+variable "entrypoint" {
+  type = list(string)
+  default = ["websecure", "web"]
 }
