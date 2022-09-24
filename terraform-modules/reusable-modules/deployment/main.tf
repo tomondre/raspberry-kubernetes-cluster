@@ -50,6 +50,7 @@ resource "kubernetes_deployment" "deployment" {
               memory = var.memory_request
             }
           }
+          args = var.args
 
           dynamic liveness_probe {
             for_each = var.health_check_path != ""? [1] : []

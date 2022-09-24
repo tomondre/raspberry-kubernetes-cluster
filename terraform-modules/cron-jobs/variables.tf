@@ -15,4 +15,6 @@ variable "name" {
   type = string
 }
 
-variable "tag" {}
+variable "tag" {
+  type = string
+}

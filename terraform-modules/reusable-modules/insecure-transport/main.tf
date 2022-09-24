@@ -4,13 +4,6 @@ terraform {
       source = "gavinbunney/kubectl"
     }
   }
-  cloud {
-    organization = "raspberry-kubernetes-cluster"
-
-    workspaces {
-      tags = ["traefik-config"]
-    }
-  }
 }
 
 provider "kubernetes" {

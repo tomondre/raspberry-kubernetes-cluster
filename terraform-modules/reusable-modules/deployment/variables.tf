@@ -45,6 +45,11 @@ variable "health_check_path" {
   default = ""
 }
 
+variable "args" {
+  type = list(string)
+  default = []
+}
+
 variable "port" {
   type    = number
   default = 80
