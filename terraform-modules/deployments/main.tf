@@ -84,7 +84,7 @@ module "api_tomondre_deployment" {
 module "portfolio_angular_deployment" {
   source            = "../reusable-modules/full-deployment"
   health_check_path = "/"
-  image_tag         = "12"
+  image_tag         = "13"
   image_url         = "tomondre/portfolio-angular"
   service_name      = "portfolio"
   port              = 80
@@ -112,13 +112,37 @@ module "my_ip" {
   port              = 80
 }
 
-#For DEBUG purposes
-#For some weird reason, the full-deployment is clashing with other services using the same port - 80. I have to investigate a bit more what is this problem
-#module "request_echo_deployment" {
-#  source            = "../reusable-modules/full-deployment"
-#  health_check_path = "/"
-#  image_tag         = "23"
-#  image_url         = "docker.io/mendhak/http-https-echo"
-#  name              = "request-echo"
-#  port              = 80
-#}
+module "rabatoo_frontend" {
+  source            = "../reusable-modules/full-deployment"
+  service_name      = "rabatoo-frontend"
+  host_name         = "rabatoo"
+  health_check_path = "/"
+  image_tag         = "3"
+  image_url         = "docker.io/tomondre/rabatoo-frontend"
+  port              = 80
+  env               = {
+    HOST = "https://rabatoo-api.tomondre.com"
+  }
+}
+
+module "rabatoo_api" {
+  source            = "../reusable-modules/full-deployment"
+  service_name      = "rabatoo-api"
+  health_check_path = "/health"
+  image_tag         = "3"
+  image_url         = "docker.io/tomondre/rabatoo-business-logic"
+  port              = 80
+  env               = {
+    GRPC_SERVER = "https://rabatoo-grpc.tomondre.com"
+  }
+}
+
+module "rabatoo_grpc" {
+  source            = "../reusable-modules/full-deployment"
+  service_name      = "rabatoo-grpc"
+  health_check_path = ""
+  image_tag         = "4"
+  image_url         = "docker.io/tomondre/rabatoo-grpc"
+  port              = 9090
+  cpu_limit = "1000m"
+}
