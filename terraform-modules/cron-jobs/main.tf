@@ -17,7 +17,8 @@ resource "kubernetes_cron_job_v1" "celebrations_email" {
     name = var.name
   }
   spec {
-    schedule = var.cron
+    schedule           = var.cron
+    concurrency_policy = "Replace"
     job_template {
       metadata {}
       spec {
