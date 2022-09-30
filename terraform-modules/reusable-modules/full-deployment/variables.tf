@@ -63,3 +63,13 @@ variable "entrypoint" {
   type = list(string)
   default = ["websecure", "web"]
 }
+
+variable "annotations" {
+  type = map(string)
+  default = {}
+}
+
+variable "scheme" {
+  type = string
+  default = null
+}

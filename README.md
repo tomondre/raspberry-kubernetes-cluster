@@ -57,8 +57,8 @@ Anker PowerPort 63
 ### Cluster Case
 
 ![Cluster Rack](./doc/Image09%20-%20Cluster%20case.webp)
-[comment]: <> (Rack with cooling + added heat sinks on the PI chip - where to buy + price - aliexpress has rack usually without fans)
-
+[comment]: <> (Rack with cooling + added heat sinks on the PI chip - where to buy + price - aliexpress has rack usually
+without fans)
 
 # Software
 
@@ -145,8 +145,12 @@ module "lil_linko_deployment" {
 ### MariaDB
 
 ![MariaDB Logo](./doc/Image16%20-%20MariaDB%20Logo.png)
-
 [comment]: <> (Why has been chosen, connectivity - overall very good for the PIs)
+
+### GitHub Actions Runner
+
+[comment]: <> (TODO Check)
+[Girhub Actions Demo](https://github.io/tomondre/celebrator-3000/.github/workflowa)
 
 # Deployments
 
@@ -165,10 +169,8 @@ Contains RabbitMQ one node cluster - Maybe I can add this to the deployments pag
 
 # Project Future
 
-Add DNS records for the database
-More logging and add observability UI
-Add scaling rules to the deployments
-Prometheus
+Add DNS records for the database More logging and add observability UI - Prometheus + ----- Add scaling rules to the
+deployments Prometheus
 
 # References
 
