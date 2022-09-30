@@ -129,7 +129,7 @@ module "rabatoo_api" {
   source            = "../reusable-modules/full-deployment"
   service_name      = "rabatoo-api"
   health_check_path = "/health"
-  image_tag         = "3"
+  image_tag         = "4"
   image_url         = "docker.io/tomondre/rabatoo-business-logic"
   port              = 80
   env               = {
@@ -141,8 +141,10 @@ module "rabatoo_grpc" {
   source            = "../reusable-modules/full-deployment"
   service_name      = "rabatoo-grpc"
   health_check_path = ""
-  image_tag         = "4"
+  image_tag         = "5"
   image_url         = "docker.io/tomondre/rabatoo-grpc"
   port              = 9090
-  cpu_limit = "1000m"
+  cpu_limit         = "1000m"
+  annotations       = { "traefik.ingress.kubernetes.io/service.serversscheme" = "h2c" }
+  scheme            = "h2c"
 }
