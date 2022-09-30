@@ -31,6 +31,10 @@ variable "server_transport" {
   description = "This transport needs to be created beforehand"
 }
 
+variable "scheme" {
+  type = string
+}
+
 #variable "insecure_skip_verify" {
 #  type = bool
 #  default = false

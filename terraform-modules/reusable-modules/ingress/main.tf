@@ -10,14 +10,15 @@ resource "kubernetes_manifest" "traefik-ingress-route" {
       entryPoints = var.entrypoint
       routes      = [
         {
-          kind        = "Rule"
-          match       = "Host(`${var.host_name}.tomondre.com`)"
-          services    = [
+          kind     = "Rule"
+          match    = "Host(`${var.host_name}.tomondre.com`)"
+          services = [
             {
-              name      = var.service_name
-              namespace = var.service_namespace
-              port      = var.service_port
+              name             = var.service_name
+              namespace        = var.service_namespace
+              port             = var.service_port
               serversTransport = var.server_transport
+              scheme           = var.scheme
             }
           ]
         }

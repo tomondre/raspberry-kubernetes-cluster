@@ -14,3 +14,8 @@ variable "container_port" {
 variable "namespace" {
   type = string
 }
+
+variable "annotations" {
+  type = map(string)
+  default = {}
+}
