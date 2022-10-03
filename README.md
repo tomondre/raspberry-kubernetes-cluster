@@ -98,11 +98,23 @@ Bundles following technologies to single distribution:
 
 ### Ansible
 
+Ansible is a radically simple IT automation system. It handles configuration management, application deployment, cloud provisioning, ad-hoc task execution, network automation, and multi-node orchestration. Ansible makes complex changes like zero-downtime rolling updates with load balancers easy. More information on the Ansible website.
+
 ![Ansible Logo](./doc/Image11%20-%20Ansible%20Logo.png)
 
 [comment]: <> (What was used for, link to repo with Ansible settings)
 
 ### Terraform
+
+Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently. Terraform can manage existing and popular service providers as well as custom in-house solutions.
+
+The key features of Terraform are:
+* Infrastructure as Code: Infrastructure is described using a high-level configuration syntax. This allows a blueprint of your datacenter to be versioned and treated as you would any other code. Additionally, infrastructure can be shared and re-used. 
+* Execution Plans: Terraform has a "planning" step where it generates an execution plan. The execution plan shows what Terraform will do when you call apply. This lets you avoid any surprises when Terraform manipulates infrastructure. 
+* Resource Graph: Terraform builds a graph of all your resources, and parallelizes the creation and modification of any non-dependent resources. Because of this, Terraform builds infrastructure as efficiently as possible, and operators get insight into dependencies in their infrastructure. 
+* Change Automation: Complex changesets can be applied to your infrastructure with minimal human interaction. With the previously mentioned execution plan and resource graph, you know exactly what Terraform will change and in what order, avoiding many possible human errors.
+
+
 
 [comment]: <> (Url to the project with Terraform, what was used for, reusable modules, state locking, state store - Terraform Cloud)
 
@@ -171,7 +183,7 @@ tomondre.com:53 {
 
 [comment]: <> (TODO Check)
 
-[GitHub Actions Demo](https://github.io/tomondre/celebrator-3000/.github/workflowa)
+[GitHub Actions Demo](https://github.com/tomondre/celebrator-3000/blob/d65fe9dec15f01a6c166a71c92c56c48a83ca3b8/.github/workflows/github-actions.yml)
 
 # Deployments
 
@@ -200,4 +212,4 @@ deployments Prometheus
 * https://static.tp-link.com/TL-SG105E_UN_4.0_01_normal_1517903567595c.jpg
 * https://i0.wp.com/raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik-architecture.png?w=810&ssl=1 
 * https://www.raspberrypi.org/help/what-%20is-a-raspberry-pi/
-* 
+  * https://github.com/hashicorp/terraform
