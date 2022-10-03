@@ -12,6 +12,8 @@
 
 ### Raspberry PI
 
+The Raspberry Pi is a low cost, credit-card sized computer that plugs into a computer monitor or TV, and uses a standard keyboard and mouse. It is a capable little device that enables people of all ages to explore computing, and to learn how to program in languages like Scratch and Python. It’s capable of doing everything you’d expect a desktop computer to do, from browsing the internet and playing high-definition video, to making spreadsheets, word-processing, and playing games.
+
 ![Raspberry Pi 4](./doc/Image05%20-%20Rasperry%20Pi%204.jpg)
 
 [comment]: <> (Brand, specs, number of pis)
@@ -23,6 +25,7 @@
 ### Ethernet switch
 
 TP-Link Easy Smart TL-SG105E Switch 5-porte G
+
 ![Switch](./doc/Image06%20-%20Switch.jpg)
 
 
@@ -32,8 +35,9 @@ TP-Link Easy Smart TL-SG105E Switch 5-porte G
 
 TP-Link TL-MR6400 4G LTE Router
 
+![Router](./doc/Image07%20-%20Router.png)
+
 [comment]: <> (TODO Convert the image )
-![Router](./doc/Image07%20-%20SRouter.jfif)
 
 
 [comment]: <> (Brand, specs, price type - SIM)
@@ -42,7 +46,7 @@ TP-Link TL-MR6400 4G LTE Router
 
 Anker PowerPort 63
 
-![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.webp)
+![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.png)
 
 ![Router](./doc/Image07%20-%20)
 
@@ -56,13 +60,18 @@ Anker PowerPort 63
 
 ### Cluster Case
 
-![Cluster Rack](./doc/Image09%20-%20Cluster%20case.webp)
+![Cluster Rack](./doc/Image09%20-%20Cluster%20case.png)
+
 [comment]: <> (Rack with cooling + added heat sinks on the PI chip - where to buy + price - aliexpress has rack usually
 without fans)
 
 # Software
 
 ### K3s Kubernetes distribution
+
+K3s is a lightweight Kubernetes distribution created by Rancher Labs, and it is fully certified by the Cloud Native Computing Foundation (CNCF). K3s is highly available and production-ready. It has a very small binary size and very low resource requirements.
+
+In simple terms, K3s is Kubernetes with bloat stripped out and a different backing datastore. That said, it is important to note that K3s is not a fork, as it doesn’t change any of the core Kubernetes functionalities and remains close to stock Kubernetes.
 
 ![K3S](./doc/Image10%20-%20K3S%20Logo.png)
 
@@ -126,8 +135,18 @@ module "lil_linko_deployment" {
 
 ![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
 
+![Traefik Diagram](./doc/Image03%20-%20Traefik%20Diagram.png)
 
 [comment]: <> (Reverse proxy that proxies traffic to the correct kubernetes services based on the host header value of the request. This is the only endpoint exposed to the network - on ports 80 and 443 )
+
+### CoreDNS
+
+```
+tomondre.com:53 {
+  errors
+  rewrite name substring tomondre.com default.svc.cluster.local
+}
+```
 
 ### K9S Dashboard
 
@@ -145,18 +164,21 @@ module "lil_linko_deployment" {
 ### MariaDB
 
 ![MariaDB Logo](./doc/Image16%20-%20MariaDB%20Logo.png)
+
 [comment]: <> (Why has been chosen, connectivity - overall very good for the PIs)
 
 ### GitHub Actions Runner
 
 [comment]: <> (TODO Check)
-[Girhub Actions Demo](https://github.io/tomondre/celebrator-3000/.github/workflowa)
+
+[GitHub Actions Demo](https://github.io/tomondre/celebrator-3000/.github/workflowa)
 
 # Deployments
 
-Contains RabbitMQ one node cluster - Maybe I can add this to the deployments page also
-
 ![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
+
+CronJob - Celebrator 3000 Contains RabbitMQ one node cluster - Maybe I can add this to the deployments page also
+NextCloud Instance
 
 
 [comment]: <> (Link to the page with all the deployments)
@@ -177,3 +199,5 @@ deployments Prometheus
 * https://im.cyberport.de/is/image/cyberport/151216092328900701900054D?$Zoom_1000$
 * https://static.tp-link.com/TL-SG105E_UN_4.0_01_normal_1517903567595c.jpg
 * https://i0.wp.com/raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik-architecture.png?w=810&ssl=1 
+* https://www.raspberrypi.org/help/what-%20is-a-raspberry-pi/
+* 
