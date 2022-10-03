@@ -10,8 +10,8 @@
 - [Hardware](#Hardware)
 - [Software](#Software)
 - [Deployments](#Deployments)
-- [Setup Steps](#Setup Steps)
-- [Project Future](#Project Future)
+- [Setup Steps](#Setup%20Steps)
+- [Project Future](#Project%20Future)
 - [Reference](#References)
 
 # Architecture
