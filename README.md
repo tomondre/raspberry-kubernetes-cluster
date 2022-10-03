@@ -1,5 +1,9 @@
 # Intro
 
+![Cluster](./doc/Image01.jpg)
+
+![Cluster](./doc/Image02.jpg)
+
 # Table of content
 
 - [Architecture](#Architecture)
