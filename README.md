@@ -10,8 +10,8 @@
 - [Hardware](#Hardware)
 - [Software](#Software)
 - [Deployments](#Deployments)
-- [Setup Steps](#Setup%20Steps)
-- [Project Future](#Project%20Future)
+- [Setup Steps](#Setup-Steps)
+- [Project Future](#Project-Future)
 - [Reference](#References)
 
 # Architecture
@@ -89,7 +89,7 @@ Computing Foundation (CNCF). K3s is highly available and production-ready. It ha
 resource requirements.
 
 In simple terms, K3s is Kubernetes with bloat stripped out and a different backing datastore. That said, it is important
-to note that K3s is not a fork, as it doesn’t change any of the core Kubernetes functionalities and remains close to
+to note that K3s is not a fork, as it doesn't change any of the core Kubernetes functionalities and remains close to
 stock Kubernetes.
 
 ![K3S](./doc/Image10%20-%20K3S%20Logo.png)
@@ -205,6 +205,15 @@ itself automatically and dynamically. Pointing Traefik at orchestrator is the on
 
 ![Traefik Diagram](./doc/Image03%20-%20Traefik%20Diagram.png)
 
+### Ingress Route
+
+Traefik allows the traffic to be routed from same endpoint to different Kubernetes services based on rules. This
+functionality has been leveraged in order to load balance traffic to specific services based on the Host header of the
+request. The following Kubernetes Custom Resource Definition shows the rule for proxying the request to 'portfolio'
+service if the Host is 'portfolio.tomondre.com'. The entry points 'websecure' and 'web' configures endpoints for the
+traffic - websecure opens port 443 and web opens port 80 for the IngressRoute. It is important for the IngressRoute
+resource to be in the same namespace as the service where the traffic will be directed to.
+
 ```
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -231,6 +240,15 @@ spec:
 CoreDNS is a DNS server that is modular and pluggable, with plugins adding new functionalities. The CoreDNS server can
 be configured by maintaining a Corefile, which is the CoreDNS configuration file. As a cluster administrator, you can
 modify the ConfigMap for the CoreDNS Corefile to change how DNS service discovery behaves for that cluster.
+
+### Internal resolution
+
+In order to improve networking security of the pod communication, it was important to implement some kind of mechanism
+that would allow the traffic between pods be routed internally within the Kubernetes Cluster. For this purpose the
+following CoreDNS rule has been implemented. The rule resolves each request that comes to domain *.tomondre.com to the
+respective Kubernetes service. For example `lego-scraper.tomondre.com` resolves to `
+lego-scraper.default.svc.cluster.local` (this is Kubernetes' native DNS records that is then resolved to respective IP
+address)
 
 ```
 tomondre.com:53 {
@@ -287,7 +305,6 @@ serve its users.
 
 CronJob - Celebrator 3000 Contains RabbitMQ one node cluster - Maybe I can add this to the deployments page also
 NextCloud Instance
-
 
 [comment]: <> (Link to the page with all the deployments)
 
