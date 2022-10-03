@@ -2,6 +2,14 @@
 
 # Table of content
 
+- [Architecture](#Architecture)
+- [Hardware](#Hardware)
+- [Software](#Software)
+- [Deployments](#Deployments)
+- [Setup Steps](#Setup Steps)
+- [Project Future](#Project Future)
+- [Reference](#References)
+
 # Architecture
 
 [comment]: <> (Diagram)
@@ -281,7 +289,7 @@ NextCloud Instance
 
 [comment]: <> (- [Deployments]&#40;https://deployments.tomondre.com&#41;)
 
-# Setup steps
+# Setup Steps
 
 * https://github.com/k3s-io/k3s-ansible
 
