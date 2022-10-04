@@ -8,7 +8,7 @@
 - [Hardware](#Hardware)
 - [Software](#Software)
 - [Deployments](#Deployments)
-- [Setup Steps](#Setup-Steps)
+- [Setup](#Setup)
 - [Project Future](#Project-Future)
 - [References](#References)
 
@@ -347,8 +347,10 @@ the deployments in the cluster and their description, deployment date, GitHub re
 
 - [Deployments](https://deployments.tomondre.com)
 
-# Setup Steps
+# Setup
 
+* https://sahansera.dev/k3s-rapsberrypi-ansible-automation/
+* https://www.youtube.com/watch?v=X9fSMGkjtug
 * https://github.com/k3s-io/k3s-ansible
 
 # Project Future
