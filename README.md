@@ -319,14 +319,20 @@ years: the first commit was made on February 1, 2019.
 
 ## CloudFlare Argo Tunnel
 
+One of the issues that has been faced during the development process of the cluster was related to access from internet.
+The WiFi router that has been chosen for the project is a SIM router - therefore a SIM card from mobile operator needed
+to be bought. Unfortunately, the mobile operators use CG-NAT (Carrier Grade NAT) to lower the number of public IP
+addresses the operator (ISP) has in use. More info about CG-NAT [here](https://en.wikipedia.org/wiki/Carrier-grade_NAT).
+This was a problem because it was hard to open ports on shared IP address. ISPs often offers static public IP addresses.
+This would fix the problem but the static IP service is usually expensive. For security and cost reasons, it has been
+decided to use Cloudflare Argo Tunnel for incoming requests from the internet.
+
 Cloudflare Tunnel is tunneling software that lets you quickly secure and encrypt application traffic to any type of
 infrastructure, so you can hide your web server IP addresses, block direct attacks, and get back to delivering great
 applications. The Tunnel daemon creates an encrypted tunnel between your origin web server and Cloudflare’s nearest data
 center, all without opening any public inbound ports.
 
 ![Argo Tunneling Diagram](./doc/Image12%20-%20Argo%20Tunnel%20Diagram.png)
-
-[comment]: <> (Problem CG NAT, solution, security, what technology is used, how is it connected to the Cloudfare network - long polling)
 
 ## MariaDB
 
@@ -343,20 +349,19 @@ serve its users.
 
 ## GitHub Actions Runner
 
-[comment]: <> (TODO Check)
-
-[GitHub Actions Demo](https://github.com/tomondre/celebrator-3000/blob/d65fe9dec15f01a6c166a71c92c56c48a83ca3b8/.github/workflows/github-actions.yml)
+[GitHub Actions Demo Run](https://github.com/tomondre/celebrator-3000/blob/d65fe9dec15f01a6c166a71c92c56c48a83ca3b8/.github/workflows/github-actions.yml)
 
 # Deployments
 
-![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
+The cluster has currently number of deployments. They mainly consist of my personal projects and different dashboards
+for observability. [Deployments Dashboard](https://deployments.tomondre.com) has been developed for keeping track of all
+the deployments in the cluster and their description, deployment date, GitHub repo, URL and respective status.
 
-CronJob - Celebrator 3000 Contains RabbitMQ one node cluster - Maybe I can add this to the deployments page also
-NextCloud Instance
+![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
 
 [comment]: <> (Link to the page with all the deployments)
 
-[comment]: <> (- [Deployments]&#40;https://deployments.tomondre.com&#41;)
+- [Deployments](https://deployments.tomondre.com)
 
 # Setup Steps
 
@@ -364,8 +369,10 @@ NextCloud Instance
 
 # Project Future
 
-Add DNS records for the database More logging and add observability UI - Prometheus + ----- Add scaling rules to the
-deployments Prometheus
+* Add DNS record for the Database instance
+* Improve incoming reqests logging
+* Add UI for observability of different metrics in the cluster - currently only Kubernetes Dashboard is implemented
+* Add auto-scaling rules for the deployments in the cluster
 
 # References
 
