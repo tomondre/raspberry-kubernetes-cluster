@@ -358,6 +358,7 @@ the deployments in the cluster and their description, deployment date, GitHub re
 * Add UI for observability of different metrics in the cluster - currently only Kubernetes Dashboard is implemented
 * Add auto-scaling rules for the deployments in the cluster
 * Implement cron backups of the database data to ensure durability in case of the primary disk failure
+* VPN access to the cluster - unfortunately, this cannot be implemented if the cluster sits behind CG-NAT.
 
 # References
 
