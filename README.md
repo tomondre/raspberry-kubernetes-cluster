@@ -12,9 +12,19 @@
 - [Deployments](#Deployments)
 - [Setup Steps](#Setup-Steps)
 - [Project Future](#Project-Future)
-- [Reference](#References)
+- [References](#References)
 
 # Architecture
+
+The Architecture consist of 3 servers:
+
+1. Node 1 - Master Node - Manages the worker nodes and the Pods in the cluster.
+2. Node 2 - Worker Node - Contains deployments, pods and CronJobs
+3. Node 3 - Contains MariaDB database that is used by deployments in the K8 cluster. This node also contains: Nextcloud instance and NFS server that exposes storage of HDD disk to the other two nodes.
+   NextCloud.
+
+![Architecture Diagram](./doc/Image19%20-%20Architecture%20Diagram.png)
+
 
 [comment]: <> (Diagram)
 
