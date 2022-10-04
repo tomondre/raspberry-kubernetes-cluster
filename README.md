@@ -98,7 +98,9 @@ power supply, HDD, ethernet switch) can be added/stick as a modules to the clust
 
 # Software
 
-## K3s Kubernetes distribution
+## Kubernetes Distribution
+
+### Options
 
 There are many distributions that makes creation of Kubernetes clusters easy:
 
@@ -114,6 +116,8 @@ There are many distributions that makes creation of Kubernetes clusters easy:
 * k0s - Is an all-inclusive Kubernetes distribution with all the required bells and whistles preconfigured to make
   building a Kubernetes clusters a matter of just copying an executable to every host and running it.
 
+### K3s
+
 K3s has been chosen as a distribution for the cluster due to it's strong developer community, ease of setup and due to
 the big number of tutorials for this technology. It is a lightweight Kubernetes distribution created by Rancher Labs,
 and it is fully certified by the Cloud Native Computing Foundation (CNCF). K3s is highly available and production-ready.
@@ -122,6 +126,8 @@ It has a very small binary size and very low resource requirements.
 In simple terms, K3s is Kubernetes with bloat stripped out and a different backing datastore. That said, it is important
 to note that K3s is not a fork, as it doesn't change any of the core Kubernetes functionalities and remains close to
 stock Kubernetes.
+
+### Components
 
 Bundles following technologies to single distribution:
 
@@ -271,6 +277,9 @@ spec:
 
 ### Dashboard
 
+Treafik Dashboard can be used to have an overview of different IngrssRoutes and services that Traefik is managing. This
+dashboard is exposed to the internet and secured with HTTP Basic Authentication
+
 ![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
 
 ## CoreDNS
@@ -335,6 +344,12 @@ learning outcome has been also greater from this option.
 
 ## GitHub Actions Runner
 
+A self-hosted runner is a system that is deployed and managed by developer so that jobs from GitHub Actions can be
+executed in specific network. Self-hosted runners offer more control of hardware, operating system, and software tools
+than GitHub-hosted runners provide. Self-hosted runners has the following benefits: custom hardware configurations can
+be created that meet specific needs with processing power or memory for running larger jobs, installation of software
+available on local network, and choose an operating system not offered by GitHub-hosted runners.
+
 [GitHub Actions Demo Run](https://github.com/tomondre/celebrator-3000/blob/d65fe9dec15f01a6c166a71c92c56c48a83ca3b8/.github/workflows/github-actions.yml)
 
 # Deployments
@@ -361,6 +376,9 @@ the deployments in the cluster and their description, deployment date, GitHub re
 * Add auto-scaling rules for the deployments in the cluster
 * Implement cron backups of the database data to ensure durability in case of the primary disk failure
 * VPN access to the cluster - unfortunately, this cannot be implemented if the cluster sits behind CG-NAT.
+* Implement GitOps model on code repositories, that would build an image, push it to repo and then apply the new image
+  in Kubernetes deployment to update it
+* Implement GitOps model for terraform modules infrastructure updates
 
 # References
 
