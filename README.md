@@ -108,17 +108,28 @@ without fans)
 
 ## K3s Kubernetes distribution
 
-K3s is a lightweight Kubernetes distribution created by Rancher Labs, and it is fully certified by the Cloud Native
-Computing Foundation (CNCF). K3s is highly available and production-ready. It has a very small binary size and very low
-resource requirements.
+There are many distributions that makes creation of Kubernetes clusters easy:
+
+* MicroK8s - MicroK8s is a low-ops, minimal production Kubernetes, for devs, cloud, clusters, workstations, Edge and
+  IoT. It was only supporting a single node but recently they added clustering.
+* k3s - K3s is a certified Kubernetes distribution built for IoT & Edge computing. It’s very lightweight and is
+  optimized for ARM, both arm64 and armv7. K3s replaces a few components used by traditional K8s cluster. Particularly,
+  etcd is replaced with sqlite3 for state management and etc.
+* KIND - Kind is a tool for running local Kubernetes clusters using Docker container “nodes”. Kind was primarily
+  designed for testing Kubernetes itself, but may be used for local development or CI.
+* k3d - k3d is a lightweight wrapper to run k3s in docker. k3d makes it quite easy to create single- and multi-node k3s
+  clusters in docker, e.g. for local development on Kubernetes.
+* k0s - Is an all-inclusive Kubernetes distribution with all the required bells and whistles preconfigured to make
+  building a Kubernetes clusters a matter of just copying an executable to every host and running it.
+
+K3s has been chosen as a distribution for the cluster due to it's strong developer community, ease of setup and due to
+the big number of tutorials for this technology. It is a lightweight Kubernetes distribution created by Rancher Labs,
+and it is fully certified by the Cloud Native Computing Foundation (CNCF). K3s is highly available and production-ready.
+It has a very small binary size and very low resource requirements.
 
 In simple terms, K3s is Kubernetes with bloat stripped out and a different backing datastore. That said, it is important
 to note that K3s is not a fork, as it doesn't change any of the core Kubernetes functionalities and remains close to
 stock Kubernetes.
-
-![K3S](./doc/Image10%20-%20K3S%20Logo.png)
-
-[K3S Official Website](https://rancher.com/docs/k3s/latest/en/)
 
 Bundles following technologies to single distribution:
 
@@ -135,15 +146,25 @@ Bundles following technologies to single distribution:
   storage
 * [Host utilities](https://github.com/k3s-io/k3s-root) such as iptables/nftables, ebtables, ethtool, & socat
 
-[comment]: <> (Had other possibilities, but have chosen to use this distribution due to: easy installation, documentation and a lot of support )
+Website: [K3S Official Website](https://rancher.com/docs/k3s/latest/en/)
 
-[comment]: <> (What is, link, pros )
+![K3S](./doc/Image10%20-%20K3S%20Logo.png)
 
 ## Ansible
 
 Ansible is a radically simple IT automation system. It handles configuration management, application deployment, cloud
 provisioning, ad-hoc task execution, network automation, and multi-node orchestration. Ansible makes complex changes
-like zero-downtime rolling updates with load balancers easy. More information on the Ansible website.
+like zero-downtime rolling updates with load balancers easy.
+
+The technology has been used for the automation of the initial cluster setup. There are few prerequisites for the k3s
+Ansible playbook to work:
+
+1. The playbook has updated IP addresses of the Kubernetes nodes.
+2. The PC executing Ansible should have access to each node.
+3. The access should be password-less (Either not use password at all or use Public and Private Keys)
+4. In case of the Public and Private key authentication, the SSH fingerprints needs to be accepted beforehand
+
+Reference to the playbook: [Ansible k3s Playbook](https://github.com/k3s-io/k3s-ansible)
 
 ![Ansible Logo](./doc/Image11%20-%20Ansible%20Logo.png)
 
@@ -167,6 +188,9 @@ The key features of Terraform are:
 * Change Automation: Complex change sets can be applied to your infrastructure with minimal human interaction. With the
   previously mentioned execution plan and resource graph, you know exactly what Terraform will change and in what order,
   avoiding many possible human errors.
+
+Terraform modules developed for the
+project: [Terraform Modules](https://github.com/tomondre/raspberry-kubernetes-cluster/tree/master/terraform-modules)
 
 ### Reusable Modules
 
@@ -349,5 +373,6 @@ deployments Prometheus
 * https://static.tp-link.com/TL-SG105E_UN_4.0_01_normal_1517903567595c.jpg
 * https://i0.wp.com/raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik-architecture.png?w=810&ssl=1
 * https://www.raspberrypi.org/help/what-%20is-a-raspberry-pi/
-* https://github.com/hashicorp/terraform![img.png](img.png)
-* https://kubernetes.io/docs/tasks/administer-cluster/d
+* https://github.com/hashicorp/terraform
+* https://kubernetes.io/docs/tasks/administer-cluster/
+* https://medium.com/codex/which-kubernetes-distribution-you-should-install-on-raspberry-pi-27fa9fe1e658
