@@ -62,7 +62,7 @@ simple network management and basic features.
 TL-MR6400 is a 300 Mbps Wireless N 4G LTE Router that shares internet access with up to 32 WiFi devices while providing
 download speeds of up to 150 Mbps.
 
-![Router](./doc/Image07%20-%20Router.png)
+![Router](./doc/Image07%20-%20Router.jpg)
 
 ## Power supply
 
