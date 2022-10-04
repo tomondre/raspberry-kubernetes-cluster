@@ -20,15 +20,10 @@ The Architecture consist of 3 servers:
 
 1. Node 1 - Master Node - Manages the worker nodes and the Pods in the cluster.
 2. Node 2 - Worker Node - Contains deployments, pods and CronJobs
-3. Node 3 - Contains MariaDB database that is used by deployments in the K8 cluster. This node also contains: Nextcloud instance and NFS server that exposes storage of HDD disk to the other two nodes.
-   NextCloud.
+3. Node 3 - Contains MariaDB database that is used by deployments in the K8 cluster. This node also contains: Nextcloud
+   instance and NFS server that exposes storage of HDD disk to the other two nodes.
 
 ![Architecture Diagram](./doc/Image19%20-%20Architecture%20Diagram.png)
-
-
-[comment]: <> (Diagram)
-
-[comment]: <> (2 Pis for Kubernetes cluster - cluster contains stateless applications, third pi used for Database, cloud instance &#40;stateful applications&#41;)
 
 # Hardware
 
@@ -41,6 +36,11 @@ from browsing the internet and playing high-definition video, to making spreadsh
 games.
 
 ![Raspberry Pi 4](./doc/Image05%20-%20Rasperry%20Pi%204.jpg)
+
+Two different PIs versions has been used:
+
+1. Raspberry PI 4B - 8 GB RAM - 1,5 GHz Quad-Core ARM-Cortex A72 CPU
+2. Raspberry PI 2B - 2 GB RAM - 900 MHz Quad-Core 2ARM Cortex-A7
 
 [comment]: <> (Brand, specs, number of pis)
 
@@ -70,22 +70,36 @@ TP-Link TL-MR6400 4G LTE Router
 
 ## Power supply
 
-Anker PowerPort 63
+It is important to choose high quality and powerful power adapter + cables to fulfil Rasbperry' power supply
+requirements. The Raspberry PIs can be supplied by power in two ways:
+
+1. Classic cables + Power Supply
+2. POE - Power of Ethernet (Special ethernet switch can be used that provider power via Ethernet and POE hat on
+   raspberry)
+
+Because POE can be very expensive, it was decided to us classic cables and a power supply.
+
+Anker is an America's leading USB charging brand that powers 20 million+ devices. Anker PowerPoort 63W uses Qualcomm
+Quick Charge 3.0 combines with Anker's proprietary PowerIQ and VoltageBoost to deliver the fastest possible charge to
+almost any USB device. The charger has 5 ports that pump out 63W of power—enough for the whole family to simultaneously
+charge multiple devices at the highest speed possible. Due to quality, it was decided to use this charger. The price of
+it varies - starting from 35 to 50 eur.
 
 ![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.png)
 
-
-[comment]: <> (It was possible to use POE technology &#40;Power Over Ethernet&#41; - didn't use due to the hats being expensive)
-
-[comment]: <> (Into to why good power supply is important, brand, specs, price)
-
 ## Cables
+
+Two main cable types has been used in the cluster:
+
+1. Ethernet cables - 3x Goobay CAT 6a SFTP - 25 cm - 1,5 eur each
+2. Power supply cables - 3x Goobay USB 3.0 Type C - 20 cm - 3 eur each
 
 [comment]: <> (List - Types, price length? )
 
 ## Cluster Case
 
 ![Cluster Rack](./doc/Image09%20-%20Cluster%20case.png)
+
 
 [comment]: <> (Rack with cooling + added heat sinks on the PI chip - where to buy + price - aliexpress has rack usually
 without fans)
