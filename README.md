@@ -1,6 +1,6 @@
 # Intro
 
-![Cluster](./doc/Image01.jpg)
+![Cluster](./doc/Image01.png)
 
 ![Cluster](./doc/Image02.jpg)
 
@@ -75,7 +75,7 @@ requirements. The Raspberry PIs can be supplied by power in two ways:
 
 Because POE can be very expensive, it was decided to us classic cables and a power supply.
 
-Anker is an America's leading USB charging brand that powers 20 million+ devices. Anker PowerPoort 63W uses Qualcomm
+Anker is an America's leading USB charging brand that powers 20 million+ devices. Anker PowerPort 63W uses Qualcomm
 Quick Charge 3.0 combines with Anker's proprietary PowerIQ and VoltageBoost to deliver the fastest possible charge to
 almost any USB device. The charger has 5 ports that pump out 63W of power—enough for the whole family to simultaneously
 charge multiple devices at the highest speed possible. Due to quality, it was decided to use this charger. The price of
