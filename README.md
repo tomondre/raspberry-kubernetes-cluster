@@ -50,7 +50,8 @@ storage of the database data and NextCloud instance data (stateful applications)
 
 ## Ethernet switch
 
-TP-Link Easy Smart TL-SG105E Switch 5-porte G
+The TL-SG105E 5-Port Gigabit Easy Smart switch is designed specifically for small and medium networks that require
+simple network management and basic features.
 
 ![Switch](./doc/Image06%20-%20Switch.jpg)
 
