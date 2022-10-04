@@ -2,8 +2,6 @@
 
 ![Cluster](./doc/Image01.png)
 
-![Cluster](./doc/Image02.jpg)
-
 # Table of content
 
 - [Architecture](#Architecture)
@@ -81,7 +79,7 @@ almost any USB device. The charger has 5 ports that pump out 63W of power—enou
 charge multiple devices at the highest speed possible. Due to quality, it was decided to use this charger. The price of
 it varies - starting from 35 to 50 eur.
 
-![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.png)
+![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.jpg)
 
 ## Cables
 
