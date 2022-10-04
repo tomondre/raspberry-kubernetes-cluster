@@ -39,14 +39,14 @@ games.
 
 Two different PIs versions has been used:
 
-1. Raspberry PI 4B - 8 GB RAM - 1,5 GHz Quad-Core ARM-Cortex A72 CPU
-2. Raspberry PI 2B - 2 GB RAM - 900 MHz Quad-Core 2ARM Cortex-A7
-
-[comment]: <> (Brand, specs, number of pis)
+1. 2x Raspberry PI 4B - 8 GB RAM - 1,5 GHz Quad-Core ARM-Cortex A72 CPU
+2. 1x Raspberry PI 2B - 2 GB RAM - 900 MHz Quad-Core 2ARM Cortex-A7
 
 ## HDD Storage
 
-[comment]: <> (External HDD mounted as a disk to the stateful appplication pi with the sharing enabled to the other two PIs)
+External HDD disk is part of the cluster to ensure memory resources are sufficient. The HDD disk size is 1 TB and is
+attached to the third Raspberry PI that exposes the disk to the other two nodes via NFS protocol. Disk is also used for
+storage of the database data and NextCloud instance data (stateful applications).
 
 ## Ethernet switch
 
@@ -54,19 +54,14 @@ TP-Link Easy Smart TL-SG105E Switch 5-porte G
 
 ![Switch](./doc/Image06%20-%20Switch.jpg)
 
-
 [comment]: <> (Brand, specs, capacity, price)
 
 ## WiFi Router
 
-TP-Link TL-MR6400 4G LTE Router
+TL-MR6400 is a 300 Mbps Wireless N 4G LTE Router that shares internet access with up to 32 WiFi devices while providing
+download speeds of up to 150 Mbps.
 
 ![Router](./doc/Image07%20-%20Router.png)
-
-[comment]: <> (TODO Convert the image )
-
-
-[comment]: <> (Brand, specs, price type - SIM)
 
 ## Power supply
 
@@ -94,15 +89,13 @@ Two main cable types has been used in the cluster:
 1. Ethernet cables - 3x Goobay CAT 6a SFTP - 25 cm - 1,5 eur each
 2. Power supply cables - 3x Goobay USB 3.0 Type C - 20 cm - 3 eur each
 
-[comment]: <> (List - Types, price length? )
-
 ## Cluster Case
 
+Cluster case has been used to bundle all the parts of the cluster together. The case itself holds 3 Raspberry PIs and
+has a fans that keep the PIs cooled down (external heat sinks are also added on the chips). Rest of the components (
+power supply, HDD, ethernet switch) can be added/stick as a modules to the cluster case via velcro.
+
 ![Cluster Rack](./doc/Image09%20-%20Cluster%20case.png)
-
-
-[comment]: <> (Rack with cooling + added heat sinks on the PI chip - where to buy + price - aliexpress has rack usually
-without fans)
 
 # Software
 
@@ -167,8 +160,6 @@ Ansible playbook to work:
 Reference to the playbook: [Ansible k3s Playbook](https://github.com/k3s-io/k3s-ansible)
 
 ![Ansible Logo](./doc/Image11%20-%20Ansible%20Logo.png)
-
-[comment]: <> (What was used for, link to repo with Ansible settings)
 
 ## Terraform
 
@@ -249,8 +240,6 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 with existing infrastructure components (Docker, Kubernetes, Consul, Etcd, Rancher, Amazon ECS, ...) and configures
 itself automatically and dynamically. Pointing Traefik at orchestrator is the only configuration step needed.
 
-![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
-
 ![Traefik Diagram](./doc/Image03%20-%20Traefik%20Diagram.png)
 
 ### Ingress Route
@@ -281,7 +270,9 @@ spec:
       port: 8080
 ```
 
-[comment]: <> (Reverse proxy that proxies traffic to the correct kubernetes services based on the host header value of the request. This is the only endpoint exposed to the network - on ports 80 and 443 )
+### Dashboard
+
+![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
 
 ## CoreDNS
 
@@ -314,9 +305,6 @@ years: the first commit was made on February 1, 2019.
 
 ![K9S Dashboard](./doc/Image14%20-%20K9S%20Dashboard.png)
 
-
-[comment]: <> (Intro to the tool, Observability, very powerful tool to see all resource within the cluster)
-
 ## CloudFlare Argo Tunnel
 
 One of the issues that has been faced during the development process of the cluster was related to access from internet.
@@ -337,15 +325,14 @@ center, all without opening any public inbound ports.
 ## MariaDB
 
 MariaDB Server is one of the most popular database servers in the world. It’s made by the original developers of MySQL
-and guaranteed to stay open source. Notable users include Wikipedia, DBS Bank, and ServiceNow.
+and guaranteed to stay open source. Notable users include Wikipedia, DBS Bank, and ServiceNow. The intent is also to
+maintain high compatibility with MySQL, ensuring a library binary equivalency and exact matching with MySQL APIs and
+commands.
 
-The intent is also to maintain high compatibility with MySQL, ensuring a library binary equivalency and exact matching
-with MySQL APIs and commands. MariaDB developers continue to develop new features and improve performance to better
-serve its users.
+The database has been chosen due to it's compatibility with Raspberry PIs. The DB is full-featured SQL database, so the
+learning outcome has been also greater from this option.
 
 ![MariaDB Logo](./doc/Image16%20-%20MariaDB%20Logo.png)
-
-[comment]: <> (Why has been chosen, connectivity - overall very good for the PIs)
 
 ## GitHub Actions Runner
 
@@ -359,8 +346,6 @@ the deployments in the cluster and their description, deployment date, GitHub re
 
 ![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
 
-[comment]: <> (Link to the page with all the deployments)
-
 - [Deployments](https://deployments.tomondre.com)
 
 # Setup Steps
@@ -370,9 +355,10 @@ the deployments in the cluster and their description, deployment date, GitHub re
 # Project Future
 
 * Add DNS record for the Database instance
-* Improve incoming reqests logging
+* Improve incoming requests logging
 * Add UI for observability of different metrics in the cluster - currently only Kubernetes Dashboard is implemented
 * Add auto-scaling rules for the deployments in the cluster
+* Implement cron backups of the database data to ensure durability in case of the primary disk failure
 
 # References
 
