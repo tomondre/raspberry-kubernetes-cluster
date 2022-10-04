@@ -278,7 +278,7 @@ spec:
 ### Dashboard
 
 Treafik Dashboard can be used to have an overview of different IngrssRoutes and services that Traefik is managing. This
-dashboard is exposed to the internet and secured with HTTP Basic Authentication
+dashboard is exposed to the internet and secured with HTTP Basic Authentication.
 
 ![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
 
@@ -359,8 +359,6 @@ for observability. [Deployments Dashboard](https://deployments.tomondre.com) has
 the deployments in the cluster and their description, deployment date, GitHub repo, URL and respective status.
 
 ![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
-
-- [Deployments](https://deployments.tomondre.com)
 
 # Setup
 
