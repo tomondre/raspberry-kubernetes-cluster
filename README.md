@@ -364,6 +364,7 @@ the deployments in the cluster and their description, deployment date, GitHub re
 
 * https://sahansera.dev/k3s-rapsberrypi-ansible-automation/
 * https://www.youtube.com/watch?v=X9fSMGkjtug
+* https://rpi4cluster.com/
 * https://github.com/k3s-io/k3s-ansible
 
 # Project Future
