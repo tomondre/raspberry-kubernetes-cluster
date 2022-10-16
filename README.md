@@ -348,7 +348,7 @@ Prometheus is an open-source systems monitoring and alerting toolkit originally 
 
 Grafana is open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources.
 
-Both of these tool has been used for observability of the cluster and to make more data driven decisions. 
+Both of these tool has been used for observability of the cluster and to make more data driven decisions. The Grafana dashboards can be found here: [grafana.tomondre.com](https://grafana.tomondre.com/)
 
 ![Grafana Cluster](./doc/Image20%20-%20Grafana,%20Cluster.png)
 
