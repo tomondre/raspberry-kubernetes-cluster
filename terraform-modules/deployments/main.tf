@@ -133,7 +133,7 @@ module "rabatoo_api" {
   image_url         = "docker.io/tomondre/rabatoo-business-logic"
   port              = 80
   env               = {
-    GRPC_SERVER = "https://rabatoo-grpc.tomondre.com"
+    GRPC_SERVER = "http://rabatoo-grpc.default.svc.cluster.local:8080"
   }
 }
 

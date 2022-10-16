@@ -3,6 +3,10 @@ resource "kubernetes_service" "service" {
     name        = var.service_name
     namespace   = var.namespace
     annotations = var.annotations
+    labels = {
+      app = var.service_name
+      release = "kube-prometheus-stackr"
+    }
   }
   spec {
     selector = {

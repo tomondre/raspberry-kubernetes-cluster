@@ -1,4 +1,9 @@
 terraform {
+  required_providers {
+    kubectl = {
+      source = "gavinbunney/kubectl"
+    }
+  }
   cloud {
     organization = "raspberry-kubernetes-cluster"
 
@@ -24,6 +29,11 @@ module "deployment" {
   service_name = local.service_name
   port = 15672
   namespace = local.namespace
+  additional_port = [{
+    name = "metrics"
+    container_port = "15692"
+    protocol = "TCP"
+  }]
 }
 
 module "service" {
@@ -40,4 +50,28 @@ module "email_rabbitmq_consumer" {
   image_url         = "tomondre/email-rabbitmq-consumer"
   service_name      = "email-rabbitmq-consumer"
   env = var.env
+}
+
+resource "kubectl_manifest" "service_monitor" {
+  yaml_body = <<EOF
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app: rabbitmq
+    release: kube-prometheus-stackr
+  name: rabbitmq-monitor
+  namespace: default
+spec:
+  podMetricsEndpoints:
+  - path: /metrics
+    port: metrics
+  namespaceSelector:
+    matchNames:
+      - default
+  selector:
+    matchLabels:
+      app: rabbitmq
+EOF
+  depends_on = [module.service]
 }

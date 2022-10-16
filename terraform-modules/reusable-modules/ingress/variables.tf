@@ -33,6 +33,7 @@ variable "server_transport" {
 
 variable "scheme" {
   type = string
+  default = null
 }
 
 #variable "insecure_skip_verify" {

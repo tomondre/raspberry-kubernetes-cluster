@@ -3,6 +3,11 @@ variable "namespace" {
   default = "default"
 }
 
+variable "labels" {
+  type = string
+  default = null
+}
+
 variable "service_name" {
   type    = string
 }
@@ -14,6 +19,10 @@ variable "replicas" {
 
 variable "image_url" {
   type = string
+}
+
+variable "command" {
+  default = []
 }
 
 variable "image_tag" {
@@ -58,4 +67,14 @@ variable "port" {
 variable "env" {
   type = map(string)
   default = {}
+}
+
+variable "port_name" {
+  type = string
+  default = null
+}
+
+variable "additional_port" {
+  type = list(map(string))
+  default = []
 }

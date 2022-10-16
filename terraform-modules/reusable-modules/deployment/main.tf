@@ -4,6 +4,7 @@ resource "kubernetes_deployment" "deployment" {
     namespace = var.namespace
     labels    = {
       app = var.service_name
+      release : "kube-prometheus-stackr"
     }
   }
 
@@ -30,6 +31,16 @@ resource "kubernetes_deployment" "deployment" {
 
           port {
             container_port = var.port
+            name           = var.port_name
+          }
+
+          dynamic "port" {
+            for_each = var.additional_port
+            content {
+              name           = port.value.name
+              container_port = port.value.container_port
+              protocol       = port.value.protocol
+            }
           }
 
           dynamic "env" {
@@ -50,7 +61,8 @@ resource "kubernetes_deployment" "deployment" {
               memory = var.memory_request
             }
           }
-          args = var.args
+          command = var.command
+          args    = var.args
 
           dynamic liveness_probe {
             for_each = var.health_check_path != ""? [1] : []
