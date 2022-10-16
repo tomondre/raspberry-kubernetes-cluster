@@ -342,6 +342,19 @@ learning outcome has been also greater from this option.
 
 ![MariaDB Logo](./doc/Image16%20-%20MariaDB%20Logo.png)
 
+## Prometheus + Grafana
+
+Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud.
+
+Grafana is open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources.
+
+Both of these tool has been used for observability of the cluster and to make more data driven decisions. 
+
+![Grafana Cluster](./doc/Image20%20-%20Grafana,%20Cluster.png)
+
+![Grafana Rabbit](./doc/Image21%20-%20Grafana,%20RabbitMQ.png)
+
+
 ## GitHub Actions Runner
 
 A self-hosted runner is a system that is deployed and managed by developer so that jobs from GitHub Actions can be
@@ -371,7 +384,6 @@ the deployments in the cluster and their description, deployment date, GitHub re
 
 * Add DNS record for the Database instance
 * Improve incoming requests logging
-* Add UI for observability of different metrics in the cluster - currently only Kubernetes Dashboard is implemented
 * Add auto-scaling rules for the deployments in the cluster
 * Implement cron backups of the database data to ensure durability in case of the primary disk failure
 * VPN access to the cluster - unfortunately, this cannot be implemented if the cluster sits behind CG-NAT.
