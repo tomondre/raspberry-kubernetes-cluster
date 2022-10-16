@@ -16,10 +16,6 @@ terraform {
   }
 }
 
-provider "cloudflare" {
-  api_token = "FHojG2hr9iW4fhWoo7puS9UniOPupOd9stvZdjz0"
-}
-
 locals {
   namespace = "monitoring"
   host = "grafana"
@@ -36,6 +32,15 @@ resource "helm_release" "kube-prometheus" {
   namespace  = local.namespace
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "kube-prometheus-stack"
+
+  set {
+    name  = "grafana.service.useStatefulSet"
+    value = "true"
+  }
+  set {
+    name  = "grafana.service.persistence.enabled"
+    value = "true"
+  }
 }
 
 module "record" {
