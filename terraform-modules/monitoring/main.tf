@@ -34,11 +34,19 @@ resource "helm_release" "kube-prometheus" {
   chart      = "kube-prometheus-stack"
 
   set {
-    name  = "grafana.service.useStatefulSet"
+    name  = "grafana.useStatefulSet"
     value = "true"
   }
   set {
-    name  = "grafana.service.persistence.enabled"
+    name  = "grafana.persistence.storageClassName"
+    value = "local-path"
+  }
+  set {
+    name  = "grafana.persistence.size"
+    value = "5Gi"
+  }
+  set {
+    name  = "grafana.persistence.enabled"
     value = "true"
   }
 }
