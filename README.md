@@ -1,6 +1,6 @@
 # Intro
 
-![Cluster](./doc/Image01.png)
+![Cluster](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image01.png)
 
 # Table of content
 
@@ -21,7 +21,7 @@ The Architecture consist of 3 servers:
 3. Node 3 - Contains MariaDB database that is used by deployments in the K8 cluster. This node also contains: Nextcloud
    instance and NFS server that exposes storage of HDD disk to the other two nodes.
 
-![Architecture Diagram](./doc/Image19%20-%20Architecture%20Diagram.png)
+![Architecture Diagram](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image19+-+Architecture+Diagram.png)
 
 # Hardware
 
@@ -33,7 +33,7 @@ to program in languages like Scratch and Python. It’s capable of doing everyth
 from browsing the internet and playing high-definition video, to making spreadsheets, word-processing, and playing
 games.
 
-![Raspberry Pi 4](./doc/Image05%20-%20Rasperry%20Pi%204.jpg)
+![Raspberry Pi 4](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image05+-+Rasperry+Pi+4.jpg)
 
 Two different PIs versions has been used:
 
@@ -51,7 +51,7 @@ storage of the database data and NextCloud instance data (stateful applications)
 The TL-SG105E 5-Port Gigabit Easy Smart switch is designed specifically for small and medium networks that require
 simple network management and basic features.
 
-![Switch](./doc/Image06%20-%20Switch.jpg)
+![Switch](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image06+-+Switch.jpg)
 
 [comment]: <> (Brand, specs, capacity, price)
 
@@ -60,7 +60,7 @@ simple network management and basic features.
 TL-MR6400 is a 300 Mbps Wireless N 4G LTE Router that shares internet access with up to 32 WiFi devices while providing
 download speeds of up to 150 Mbps.
 
-![Router](./doc/Image07%20-%20Router.jpg)
+![Router](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image07+-+Router.jpg)
 
 ## Power supply
 
@@ -79,7 +79,7 @@ almost any USB device. The charger has 5 ports that pump out 63W of power—enou
 charge multiple devices at the highest speed possible. Due to quality, it was decided to use this charger. The price of
 it varies - starting from 35 to 50 eur.
 
-![Cluster Rack](./doc/Image17%20-%20Anker%20Power%20Supply.jpg)
+![Cluster Rack](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image17+-+Anker+Power+Supply.jpg)
 
 ## Cables
 
@@ -94,7 +94,7 @@ Cluster case has been used to bundle all the parts of the cluster together. The 
 has a fans that keep the PIs cooled down (external heat sinks are also added on the chips). Rest of the components (
 power supply, HDD, ethernet switch) can be added/stick as a modules to the cluster case via velcro.
 
-![Cluster Rack](./doc/Image09%20-%20Cluster%20case.png)
+![Cluster Rack](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image09+-+Cluster+case.png)
 
 # Software
 
@@ -146,7 +146,7 @@ Bundles following technologies to single distribution:
 
 Website: [K3S Official Website](https://rancher.com/docs/k3s/latest/en/)
 
-![K3S](./doc/Image10%20-%20K3S%20Logo.png)
+![K3S](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image10+-+K3S+Logo.png)
 
 ## Ansible
 
@@ -164,7 +164,7 @@ Ansible playbook to work:
 
 Reference to the playbook: [Ansible k3s Playbook](https://github.com/k3s-io/k3s-ansible)
 
-![Ansible Logo](./doc/Image11%20-%20Ansible%20Logo.png)
+![Ansible Logo](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image11+-+Ansible+Logo.png)
 
 ## Terraform
 
@@ -237,7 +237,7 @@ to ensure state file consistency between deployments. Even though Terraform Clou
 executed remotely in the cloud, it was not a requirement to do so, therefore the Terraform CLI was executed locally in
 the private network
 
-![Terraform Cloud](./doc/Image18%20-%20Terraform%20Clodu.png)
+![Terraform Cloud](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image18+-+Terraform+Clodu.png)
 
 ## Traefik
 
@@ -245,7 +245,7 @@ Traefik is a modern HTTP reverse proxy and load balancer that makes deploying mi
 with existing infrastructure components (Docker, Kubernetes, Consul, Etcd, Rancher, Amazon ECS, ...) and configures
 itself automatically and dynamically. Pointing Traefik at orchestrator is the only configuration step needed.
 
-![Traefik Diagram](./doc/Image03%20-%20Traefik%20Diagram.png)
+![Traefik Diagram](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image03+-+Traefik+Diagram.png)
 
 ### Ingress Route
 
@@ -280,7 +280,7 @@ spec:
 Treafik Dashboard can be used to have an overview of different IngrssRoutes and services that Traefik is managing. This
 dashboard is exposed to the internet and secured with HTTP Basic Authentication.
 
-![Traefik Dashboard](./doc/Image15%20-%20Traefik%20Dashboard.png)
+![Traefik Dashboard](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image15+-+Traefik+Dashboard.png)
 
 ## CoreDNS
 
@@ -311,7 +311,7 @@ applications in K8s. K9s continuously monitors Kubernetes clusters for changes a
 interact with the observed sources. This Open Source project is written in Go and has been in existence for almost 2
 years: the first commit was made on February 1, 2019.
 
-![K9S Dashboard](./doc/Image14%20-%20K9S%20Dashboard.png)
+![K9S Dashboard](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image14+-+K9S+Dashboard.png)
 
 ## CloudFlare Argo Tunnel
 
@@ -328,7 +328,7 @@ infrastructure, so you can hide your web server IP addresses, block direct attac
 applications. The Tunnel daemon creates an encrypted tunnel between your origin web server and Cloudflare’s nearest data
 center, all without opening any public inbound ports.
 
-![Argo Tunneling Diagram](./doc/Image12%20-%20Argo%20Tunnel%20Diagram.png)
+![Argo Tunneling Diagram](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image12+-+Argo+Tunnel+Diagram.png)
 
 ## MariaDB
 
@@ -340,7 +340,7 @@ commands.
 The database has been chosen due to it's compatibility with Raspberry PIs. The DB is full-featured SQL database, so the
 learning outcome has been also greater from this option.
 
-![MariaDB Logo](./doc/Image16%20-%20MariaDB%20Logo.png)
+![MariaDB Logo](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image16+-+MariaDB+Logo.png)
 
 ## Prometheus + Grafana
 
@@ -350,9 +350,9 @@ Grafana is open and composable observability and data visualization platform. Vi
 
 Both of these tool has been used for observability of the cluster and to make more data driven decisions. Loki has been implemented as a log aggregator that can be used for dashboards related to logs. The Grafana dashboards can be found here: [grafana.tomondre.com](https://grafana.tomondre.com/)
 
-![Grafana Cluster](./doc/Image20%20-%20Grafana,%20Cluster.png)
+![Grafana Cluster](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image20+-+Grafana,+Cluster.png)
 
-![Grafana Rabbit](./doc/Image21%20-%20Grafana,%20RabbitMQ.png)
+![Grafana Rabbit](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image21+-+Grafana,+RabbitMQ.png)
 
 
 ## GitHub Actions Runner
@@ -371,7 +371,7 @@ The cluster has currently number of deployments. They mainly consist of my perso
 for observability. [Deployments Dashboard](https://deployments.tomondre.com) has been developed for keeping track of all
 the deployments in the cluster and their description, deployment date, GitHub repo, URL and respective status.
 
-![Deployments Dashboard](./doc/Image13%20-%20Deployments%20Dashboard.png)
+![Deployments Dashboard](https://wordpress-blog-assets.s3.eu-central-1.amazonaws.com/blog/raspberry-kubernetes-cluster/Image13+-+Deployments+Dashboard.png)
 
 # Setup
 
@@ -396,7 +396,7 @@ the deployments in the cluster and their description, deployment date, GitHub re
 * https://im.cyberport.de/is/image/cyberport/151216092328900701900054D?$Zoom_1000$
 * https://static.tp-link.com/TL-SG105E_UN_4.0_01_normal_1517903567595c.jpg
 * https://i0.wp.com/raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik-architecture.png?w=810&ssl=1
-* https://www.raspberrypi.org/help/what-%20is-a-raspberry-pi/
+* https://www.raspberrypi.org/help/what-+is-a-raspberry-pi/
 * https://github.com/hashicorp/terraform
 * https://kubernetes.io/docs/tasks/administer-cluster/
 * https://medium.com/codex/which-kubernetes-distribution-you-should-install-on-raspberry-pi-27fa9fe1e658
