@@ -72,23 +72,6 @@ module "api_tomondre_deployment" {
   }
 }
 
-#module "portfolio_deployment" {
-#  source            = "../reusable-modules/full-deployment"
-#  service_name      = "portfolio"
-#  health_check_path = "/Healthcheck.html"
-#  image_tag         = "4"
-#  image_url         = "docker.io/tomondre/portfolio"
-#  port              = 80
-#}
-
-module "portfolio_angular_deployment" {
-  source            = "../reusable-modules/full-deployment"
-  health_check_path = "/"
-  image_tag         = "13"
-  image_url         = "tomondre/portfolio-angular"
-  service_name      = "portfolio"
-  port              = 80
-}
 
 module "my_ip_api" {
   source            = "../reusable-modules/full-deployment"
@@ -148,3 +131,30 @@ module "rabatoo_grpc" {
   annotations       = { "traefik.ingress.kubernetes.io/service.serversscheme" = "h2c" }
   scheme            = "h2c"
 }
+
+module "product_api" {
+  source            = "../reusable-modules/full-deployment"
+  service_name      = "product-api"
+  health_check_path = "/health"
+  image_tag         = "7"
+  image_url         = "docker.io/tomondre/product-api"
+  port              = 8080
+}
+
+#module "portfolio_deployment" {
+#  source            = "../reusable-modules/full-deployment"
+#  service_name      = "portfolio"
+#  health_check_path = "/Healthcheck.html"
+#  image_tag         = "4"
+#  image_url         = "docker.io/tomondre/portfolio"
+#  port              = 80
+#}
+
+#module "portfolio_angular_deployment" {
+#  source            = "../reusable-modules/full-deployment"
+#  health_check_path = "/"
+#  image_tag         = "14"
+#  image_url         = "tomondre/portfolio-angular"
+#  service_name      = "portfolio"
+#  port              = 80
+#}
