@@ -346,14 +346,16 @@ learning outcome has been also greater from this option.
 
 Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud.
 
-Grafana is open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources.
+Grafana is open and composable observability and data visualization platform. Visualize metrics, logs, and traces from
+multiple sources.
 
-Both of these tool has been used for observability of the cluster and to make more data driven decisions. Loki has been implemented as a log aggregator that can be used for dashboards related to logs. The Grafana dashboards can be found here: [grafana.tomondre.com](https://grafana.tomondre.com/)
+Both of these tool has been used for observability of the cluster and to make more data driven decisions. Loki has been
+implemented as a log aggregator that can be used for dashboards related to logs. The Grafana dashboards can be found
+here: [grafana.tomondre.com](https://grafana.tomondre.com/)
 
 ![Grafana Cluster](https://cdn.tomondre.com/raspberry-k8s-img/Image20+-+Grafana,+Cluster.png)
 
 ![Grafana Rabbit](https://cdn.tomondre.com/raspberry-k8s-img/Image21+-+Grafana,+RabbitMQ.png)
-
 
 ## GitHub Actions Runner
 
@@ -361,9 +363,43 @@ A self-hosted runner is a system that is deployed and managed by developer so th
 executed in specific network. Self-hosted runners offer more control of hardware, operating system, and software tools
 than GitHub-hosted runners provide. Self-hosted runners has the following benefits: custom hardware configurations can
 be created that meet specific needs with processing power or memory for running larger jobs, installation of software
-available on local network, and choose an operating system not offered by GitHub-hosted runners.
+available on local network, and choose an operating system not offered by GitHub-hosted runners. Both github-offered and
+self-hosted runners have been used to ensure the computing capacity and access to the Kubernetes network. The pipelines
+consist of two workflows:
 
-[GitHub Actions Demo Run](https://github.com/tomondre/celebrator-3000/blob/d65fe9dec15f01a6c166a71c92c56c48a83ca3b8/.github/workflows/github-actions.yml)
+1. CI - run on github-offered runners - this flow creates a docker image and push it into docker hub with a specific
+   tag. The docker is build for arm64 platform to ensure that the container can be run on Raspberry PI's architecture.
+2. CD - run on self-hosted runners - this flow applies the new configuration via Terraform so that the Kubernetes can
+   spin up a container with the newest tag.
+
+```
+name: Tomondre's portfolio webpage
+run-name: CI & CD worfklows for the Kubernetes deplyment 🚀
+on: [push]
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: tomondre/portfolio-angular:${{ github.run_number }}
+
+  CD:
+    runs-on: self-hosted
+    needs: CI
+    steps:
+      - name: Terraform apply
+        working-directory: infrastructure
+        run: terraform apply -auto-approve -var "image_tag=${{ github.run_number }}"
+```
+*Simplified version of the pipeline*
+
+![CI/CD Pipeline for portfolio page](https://cdn.tomondre.com/raspberry-k8s-img/Image22%20-%20Portfolio%20CI%20CD.png)
+*CI/CD Pipeline for portfolio page*
 
 # Deployments
 
