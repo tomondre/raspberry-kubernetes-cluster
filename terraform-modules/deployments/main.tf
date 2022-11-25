@@ -40,15 +40,6 @@ module "lil_linko_deployment" {
   }
 }
 
-module "deployments_overview_page" {
-  source            = "../reusable-modules/full-deployment"
-  health_check_path = "/"
-  image_tag         = "13"
-  image_url         = "docker.io/tomondre/deployments-page"
-  service_name      = "deployments"
-  port              = 80
-}
-
 #Change the internal dns call that ends with .tomondre.com to be routed to the load balancer of the kubernetes cluster
 module "is_ok_deployment" {
   source            = "../reusable-modules/full-deployment"
@@ -140,6 +131,15 @@ module "product_api" {
   image_url         = "docker.io/tomondre/product-api"
   port              = 8080
 }
+
+#module "deployments_overview_page" {
+#  source            = "../reusable-modules/full-deployment"
+#  health_check_path = "/"
+#  image_tag         = "13"
+#  image_url         = "docker.io/tomondre/deployments-page"
+#  service_name      = "deployments"
+#  port              = 80
+#}
 
 #module "portfolio_deployment" {
 #  source            = "../reusable-modules/full-deployment"
