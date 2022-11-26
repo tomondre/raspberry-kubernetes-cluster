@@ -1,4 +1,4 @@
-resource "kubernetes_cron_job" "celebrations_email" {
+resource "kubernetes_cron_job" "cron_job" {
   metadata {
     name = var.name
   }
