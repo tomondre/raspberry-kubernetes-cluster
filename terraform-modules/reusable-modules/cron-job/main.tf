@@ -28,7 +28,7 @@ resource "kubernetes_cron_job_v1" "celebrations_email" {
           spec {
             container {
               name  = var.name
-              image = "${var.image}:${var.tag}"
+              image = "${var.image_url}:${var.image_tag}"
               dynamic "env" {
                 for_each = var.env
                 content {
