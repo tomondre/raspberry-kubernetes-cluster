@@ -7,7 +7,7 @@ variable "cron" {
   type = string
 }
 
-variable "image" {
+variable "image_url" {
   type = string
 }
 
@@ -15,6 +15,6 @@ variable "name" {
   type = string
 }
 
-variable "tag" {
+variable "image_tag" {
   type = string
 }
