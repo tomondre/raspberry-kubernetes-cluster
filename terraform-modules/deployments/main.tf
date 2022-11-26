@@ -26,20 +26,6 @@ module "lego_scraper_deployment" {
   port              = 9000
 }
 
-module "lil_linko_deployment" {
-  source            = "../reusable-modules/full-deployment"
-  health_check_path = "/healthcheck"
-  image_tag         = "17"
-  image_url         = "docker.io/tomondre/lil-linko"
-  service_name      = local.lil_linko_host
-  port              = 8080
-  env               = {
-    DATABASE_URL     = var.lil_linko_db_url
-    HOST_URL         = "https://${local.lil_linko_host}.tomondre.com"
-    ABSTRACT_API_KEY = var.lil_linko_abstract_api_key
-  }
-}
-
 #Change the internal dns call that ends with .tomondre.com to be routed to the load balancer of the kubernetes cluster
 module "is_ok_deployment" {
   source            = "../reusable-modules/full-deployment"
@@ -60,20 +46,6 @@ module "api_tomondre_deployment" {
   port              = 8080
   env               = {
     DATABASE_URL = var.api_tomondre_db_url
-  }
-}
-
-
-module "my_ip_api" {
-  source            = "../reusable-modules/full-deployment"
-  health_check_path = "/health"
-  image_tag         = "4"
-  image_url         = "tomondre/my-ip-api"
-  service_name      = "my-ip-api"
-  port              = 8080
-  env               = {
-    ABSTRACT_API_KEY = var.lil_linko_abstract_api_key
-    PORT             = 8080
   }
 }
 
@@ -131,6 +103,33 @@ module "product_api" {
   image_url         = "docker.io/tomondre/product-api"
   port              = 8080
 }
+
+#module "my_ip_api" {
+#  source            = "../reusable-modules/full-deployment"
+#  health_check_path = "/health"
+#  image_tag         = "4"
+#  image_url         = "tomondre/my-ip-api"
+#  service_name      = "my-ip-api"
+#  port              = 8080
+#  env               = {
+#    ABSTRACT_API_KEY = var.lil_linko_abstract_api_key
+#    PORT             = 8080
+#  }
+#}
+
+#module "lil_linko_deployment" {
+#  source            = "../reusable-modules/full-deployment"
+#  health_check_path = "/healthcheck"
+#  image_tag         = "17"
+#  image_url         = "docker.io/tomondre/lil-linko"
+#  service_name      = local.lil_linko_host
+#  port              = 8080
+#  env               = {
+#    DATABASE_URL     = var.lil_linko_db_url
+#    HOST_URL         = "https://${local.lil_linko_host}.tomondre.com"
+#    ABSTRACT_API_KEY = var.lil_linko_abstract_api_key
+#  }
+#}
 
 #module "deployments_overview_page" {
 #  source            = "../reusable-modules/full-deployment"
