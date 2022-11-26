@@ -258,7 +258,41 @@ resource "github_actions_secret" "celebrator_3000_terraform_emails" {
   plaintext_value = var.celebrator_emails
 }
 
+resource "github_actions_secret" "you_are_star_dockerhub_username" {
+  repository      = "you-are-my-star"
+  secret_name     = "DOCKERHUB_USERNAME"
+  plaintext_value = var.dockerhub_username
+}
 
+resource "github_actions_secret" "you_are_star_dockerhub_token" {
+  repository      = "you-are-my-star"
+  secret_name     = "DOCKERHUB_TOKEN"
+  plaintext_value = var.dockerhub_token
+}
+
+resource "github_actions_secret" "you_are_star_cloudflare_token" {
+  repository      = "you-are-my-star"
+  secret_name     = "CLOUDFLARE_API_TOKEN"
+  plaintext_value = var.cloudflare_api_token
+}
+
+resource "github_actions_secret" "you_are_star_kubernetes_config_file" {
+  repository      = "you-are-my-star"
+  secret_name     = "KUBE_CONFIG"
+  plaintext_value = var.kube_config
+}
+
+resource "github_actions_secret" "you_are_star_terraform_cloud_token" {
+  repository      = "you-are-my-star"
+  secret_name     = "TERRAFORM_TOKEN"
+  plaintext_value = var.terraform_token
+}
+
+resource "github_actions_secret" "you_are_star_terraform_abstract_token" {
+  repository      = "you-are-my-star"
+  secret_name     = "STAR_GITHUB_TOKEN"
+  plaintext_value = var.star_github_token
+}
 
 
 

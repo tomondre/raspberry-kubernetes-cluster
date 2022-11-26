@@ -57,3 +57,7 @@ variable "celebrator_rabbitmq_port" {
 variable "celebrator_emails" {
   type = string
 }
+
+variable "star_github_token" {
+  type = string
+}
