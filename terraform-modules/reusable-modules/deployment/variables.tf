@@ -70,11 +70,16 @@ variable "env" {
 }
 
 variable "port_name" {
-  type = string
+  type    = string
   default = null
 }
 
 variable "additional_port" {
-  type = list(map(string))
+  type    = list(map(string))
   default = []
+}
+
+variable "health_check_initial_delay_seconds" {
+  type    = number
+  default = 5
 }

@@ -30,17 +30,18 @@ module "ingress" {
 }
 
 module "deployment" {
-  source            = "../deployment"
-  health_check_path = var.health_check_path
-  image_tag         = var.image_tag
-  image_url         = var.image_url
-  service_name      = var.service_name
-  port              = var.port
-  namespace         = var.namespace
-  replicas          = var.replicas
-  env               = var.env
-  cpu_limit         = var.cpu_limit
-  cpu_request       = var.cpu_request
-  memory_limit      = var.memory_limit
-  memory_request    = var.memory_request
+    source                            = "../deployment"
+    health_check_path                 = var.health_check_path
+    image_tag                         = var.image_tag
+    image_url                         = var.image_url
+    service_name                      = var.service_name
+    port                              = var.port
+    namespace                         = var.namespace
+    replicas                          = var.replicas
+    env                               = var.env
+    cpu_limit                         = var.cpu_limit
+    cpu_request                       = var.cpu_request
+    memory_limit                      = var.memory_limit
+    memory_request                    = var.memory_request
+    health_check_initial_delay_seconds= var.health_check_initial_delay_seconds
 }

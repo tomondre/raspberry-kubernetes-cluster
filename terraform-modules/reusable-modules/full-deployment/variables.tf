@@ -73,3 +73,8 @@ variable "scheme" {
   type = string
   default = null
 }
+
+variable "health_check_initial_delay_seconds" {
+  type = number
+  default = 5
+}
