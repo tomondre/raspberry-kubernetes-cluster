@@ -1,0 +1,21 @@
+name: Terraform apply the environment
+run-name: Terraform apply to the kubernetes cluster 🚀
+on: [push]
+jobs:
+  terraform-apply:
+    runs-on: self-hosted
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      KUBE_CONFIG_PATH: ~/kubeconfig.yaml
+      TF_TOKEN_app_terraform_io: ${{ secrets.TERRAFORM_TOKEN }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Set-up kube config
+        run: echo "${{ secrets.KUBE_CONFIG }}" > ~/kubeconfig.yaml
+      - name: Terraform Initialize
+        working-directory: terraform/env
+        run: terraform init
+      - name: Terraform apply
+        working-directory: terraform/env
+        run: terraform apply -auto-approve
