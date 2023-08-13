@@ -10,7 +10,7 @@ terraform {
 
 locals {
   host = "cloud.tomondre.com"
-  service_name = nextcloud
+  service_name = "nextcloud"
 }
 
 #resource "kubernetes_manifest" "traefik-ingress-route" {
