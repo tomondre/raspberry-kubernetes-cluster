@@ -8,6 +8,9 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       KUBE_CONFIG_PATH: ~/kubeconfig.yaml
       TF_TOKEN_app_terraform_io: ${{ secrets.TERRAFORM_TOKEN }}
+      TF_VAR_nextcloud_aws_access_key: ${{ secrets.NEXTCLOUD_AWS_ACCESS_KEY }}
+      TF_VAR_nextcloud_aws_secret_key: ${{ secrets.NEXTCLOUD_AWS_SECRET_KEY }}
+      TF_VAR_nextcloud_aws_region: ${{ secrets.NEXTCLOUD_AWS_REGION }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
